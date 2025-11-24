@@ -139,14 +139,14 @@ class TrajectoryData(Dataset):
         """
         return self.obs.size(0)
 
-    def __getitem__(self, idx: int):
+    def __getitem__(self, idx: int) -> tuple[torch.Tensor, ...]:
         """Get a single timestep from the trajectory.
 
         Args:
             idx (int): Index of the timestep to retrieve.
 
         Returns:
-            tuple: A tuple containing the timestep data.
+            tuple[torch.Tensor, ...]: A tuple containing the timestep data.
         """
         return (
             self.num_loops[idx],
@@ -165,7 +165,7 @@ class TrajectoryData(Dataset):
             self.advantages[idx],
         )
 
-    def __add__(self, other: 'TrajectoryData'):
+    def __add__(self, other: 'TrajectoryData') -> 'TrajectoryData':
         """Concatenate this trajectory with another.
 
         Args:
@@ -203,12 +203,12 @@ class TrajectoryData(Dataset):
 
         return self_other
 
-    def loader(self, batch_size: Optional[int], num_trajectories: int):
+    def loader(self, batch_size: Optional[int], num_trajectories: int) -> DataLoader:
         """Create a DataLoader for the trajectory.
 
         Args:
             batch_size (int): Batch size for the DataLoader.
-            num_samples (int): Maximum number of samples to take batches from.
+            num_trajectories (int): Number of trajectories to use for training.
 
         Returns:
             DataLoader: The DataLoader for the trajectory.
@@ -294,8 +294,6 @@ class TrajectoryData(Dataset):
         """Compute the returns.
 
         Args:
-            done (torch.Tensor): done flags.
-            rewards (torch.Tensor): rewards.
             gamma (float): discount factor. Defaults to 1.
 
         Returns:

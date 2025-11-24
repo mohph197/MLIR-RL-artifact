@@ -87,7 +87,6 @@ class Execution(metaclass=Singleton):
 
         Args:
             new_data (dict[str, dict[str, int]]): The new data to update.
-            tmp_exec_data_file (str): The path to the temporary execution data file.
         """
         if not self.exec_data_file:
             raise Exception("Execution data file not provided")
@@ -114,8 +113,7 @@ class Execution(metaclass=Singleton):
         """Get the code cache key for the given operation state.
 
         Args:
-            state (OperationState): The operation state to get the code cache key.
-            bench_data (BenchmarkFeatures): The benchmark features data.
+            seq (list[list[Action]]): The sequence of transformations applied to reach this code.
 
         Returns:
             str: the code cache key.
@@ -199,7 +197,6 @@ class Execution(metaclass=Singleton):
         Args:
             bench_name (str): The benchmark name to check.
             cache_key (str): The cache key to check.
-            tmp_exec_data_file (str): The path to the temporary execution data file.
 
         Returns:
             Optional[int]: the execution time in nanoseconds if the operation is found in the cache, otherwise None.

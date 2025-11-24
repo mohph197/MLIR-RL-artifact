@@ -210,7 +210,7 @@ class PolicyModel(nn.Module):
         """Calculate the policy loss.
 
         Args:
-            new_actions_log_p (torch.Tensor): The log probabilities of the new actions.
+            actions_log_p (torch.Tensor): The log probabilities of the new actions.
             actions_bev_log_p (torch.Tensor): The log probabilities of the actions under the behavior policy.
             off_policy_rates (torch.Tensor): The rate between the old policy and the behavioral (mu) policy.
             advantages (torch.Tensor): The advantages of the actions.

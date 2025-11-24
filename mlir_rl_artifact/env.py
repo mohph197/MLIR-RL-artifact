@@ -247,9 +247,6 @@ class Env:
         Args:
             state (OperationState): The current state.
             action (Action): The action taken.
-
-        Returns:
-            OperationState: The updated state.
         """
         # Record action
         state.record_action(action)
@@ -265,7 +262,6 @@ class Env:
         """Apply the sequence of actions to the state's code.
 
         Args:
-            code (str): code to apply the actions to.
             seq (list[Action]): the sequence of actions to apply.
 
         Returns:

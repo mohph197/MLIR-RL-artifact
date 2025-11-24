@@ -1,0 +1,19 @@
+site_name: MLIR RL
+theme:
+  name: material
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["."]
+          options:
+            docstring_style: google
+
+nav:
+  - Home: index.md
+  - Entry Points:
+      - Train: scripts/train.md
+      - Evaluate: scripts/evaluate.md
+  - Library:
+      - MLIR RL Artifact: library/mlir_rl_artifact.md

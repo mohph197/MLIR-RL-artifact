@@ -3,3 +3,4 @@ __pycache__/
 build*/
 .vscode/
 .env*
+site/

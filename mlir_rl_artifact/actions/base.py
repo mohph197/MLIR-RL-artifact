@@ -178,7 +178,7 @@ class Action:
         """Return the action history for this action type in the current state
 
         Args:
-            state (OperationState): current state to check the action on
+            seq (list[Action]): sequence of actions in the current state
 
         Returns:
             Optional[torch.Tensor]: action history for this action type, or None if not applicable

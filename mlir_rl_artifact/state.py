@@ -183,14 +183,13 @@ class OperationState:
         )
 
 
-def extract_bench_features_from_code(bench_name: str, code: str, root_execution_time: int):
+def extract_bench_features_from_code(bench_name: str, code: str, root_execution_time: int) -> BenchmarkFeatures:
     """Extract benchmark features from the given code.
 
     Args:
         bench_name (str): the benchmark name
         code (str): the code to extract features from
         root_execution_time (int): the root execution time
-        execution_time (int): the execution time
 
     Returns:
         BenchmarkFeatures: the extracted benchmark features
@@ -209,14 +208,13 @@ def extract_bench_features_from_code(bench_name: str, code: str, root_execution_
     return __extract_bench_features_from_ast_result(bench_name, raw_ast_info, root_execution_time)
 
 
-def extract_bench_features_from_file(bench_name: str, file_path: str, root_execution_time: int):
+def extract_bench_features_from_file(bench_name: str, file_path: str, root_execution_time: int) -> BenchmarkFeatures:
     """Extract benchmark features from the code in the file.
 
     Args:
         bench_name (str): the benchmark name
         file_path (str): the file path
         root_execution_time (int): the root execution time
-        execution_time (int): the execution time
 
     Returns:
         BenchmarkFeatures: the extracted benchmark features
@@ -234,14 +232,13 @@ def extract_bench_features_from_file(bench_name: str, file_path: str, root_execu
     return __extract_bench_features_from_ast_result(bench_name, raw_ast_info, root_execution_time)
 
 
-def __extract_bench_features_from_ast_result(bench_name: str, raw_ast_info: str, root_execution_time: int):
+def __extract_bench_features_from_ast_result(bench_name: str, raw_ast_info: str, root_execution_time: int) -> BenchmarkFeatures:
     """Extracts benchmark features from the code's AST result and execution time.
 
     Args:
         bench_name (str): the benchmark name
         raw_ast_info (str): the raw AST information
         root_execution_time (int): the root execution time
-        execution_time (int): the execution time
 
     Returns:
         BenchmarkFeatures: extracted benchmark features
@@ -364,14 +361,14 @@ def __extract_bench_features_from_ast_result(bench_name: str, raw_ast_info: str,
     )
 
 
-def __get_operation_type(operation_name: str):
+def __get_operation_type(operation_name: str) -> OperationType:
     """Get the operation type from the operation name.
 
     Args:
         operation_name (str): The operation name.
 
     Returns:
-        Optional[OperationType]: The operation type or None if not found.
+        OperationType: The operation type or None if not found.
     """
     for operation_type in OperationType:
         if operation_type.value and operation_type.value in operation_name:
