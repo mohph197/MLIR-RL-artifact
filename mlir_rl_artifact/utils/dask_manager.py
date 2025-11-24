@@ -1,3 +1,10 @@
+"""Distributed computation management using Dask.
+
+This module handles distributed parallel execution of benchmark evaluations
+across multiple worker nodes. It provides abstractions for mapping functions
+across data in a distributed manner with resource management.
+"""
+
 import os
 import subprocess
 from time import sleep, time

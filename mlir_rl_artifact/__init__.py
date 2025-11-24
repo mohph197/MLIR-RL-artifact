@@ -1,3 +1,8 @@
+"""Core module for MLIR RL.
+
+This module sets up the computation device (CUDA or CPU).
+"""
+
 import torch
 from mlir_rl_artifact.utils.log import print_info
 

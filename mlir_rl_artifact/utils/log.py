@@ -1,3 +1,9 @@
+"""Logging utilities for console output with labels and colors.
+
+This module provides helper functions for printing status messages with
+labels and consistent formatting, supporting both local and distributed execution.
+"""
+
 from datetime import datetime
 import random
 import string

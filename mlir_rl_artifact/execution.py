@@ -1,3 +1,10 @@
+"""Code execution and caching module for MLIR benchmarks.
+
+This module handles the execution of transformed MLIR code, including bufferization,
+lowering, and performance measurement. It manages an execution cache to avoid redundant
+computations and interfaces with the MLIR execution engine to measure actual execution times.
+"""
+
 import os
 import ctypes
 import ctypes.util
@@ -50,14 +57,21 @@ class Execution(metaclass=Singleton):
         self.main_exec_data = main_exec_data
 
     def execute_code(self, module: Module, bench_name: str, seq: list[list['Action']]) -> tuple[int, bool, bool]:
-        """Evaluates the given MLIR code with a timeout.
+        """Executes the given MLIR module and measures execution time.
+
+        Checks the execution cache first for code matching this sequence. If not found,
+        applies bufferization and lowering transforms before executing the code.
 
         Args:
-            state (OperationState): The operation state to evaluate.
-            tmp_exec_data_file (str): The path to the temporary execution data file.
+            module (Module): The MLIR module to execute.
+            bench_name (str): The benchmark name for cache management.
+            seq (list[list[Action]]): The sequence of transformations applied to reach this code.
 
         Returns:
-            tuple[int,bool,bool]: (execution time in nanoseconds, assertion result, cache miss flag)
+            tuple[int, bool, bool]: A tuple containing:
+                - Execution time in nanoseconds
+                - Boolean indicating if execution succeeded
+                - Boolean indicating if this is a cache miss (True if executed, False if cached)
         """
         code_cache_key = self.get_code_cache_key(seq)
         cache_exec_time = self.__check_execution_cache(bench_name, code_cache_key)

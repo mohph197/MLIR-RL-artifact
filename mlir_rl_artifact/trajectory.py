@@ -1,3 +1,10 @@
+"""Trajectory data structures and utilities for RL training.
+
+This module provides classes for collecting and managing trajectory data during RL training,
+including trajectory storage, data loading, advantage computation, and experience replay.
+It implements the TrajectoryData dataset interface and trajectory collection utilities.
+"""
+
 import torch
 from torch.utils.data import Dataset, DataLoader, Sampler, RandomSampler
 from typing import Iterator, Optional
@@ -17,18 +24,21 @@ T_timestep = tuple[
     float,  # reward
     bool,  # done
 ]
+"""Type alias for a single timestep in the trajectory."""
 
 DYNAMIC_ATTRS = ['values', 'next_values', 'actions_old_log_p', 'off_policy_rates', 'returns', 'advantages']
+"""List of dynamic attributes that are computed during trajectory processing."""
 
 
 class TopKAdvantageSampler(Sampler[int]):
-    """
-    A Sampler that yields a random permutation of the indices
-    corresponding to the top-K highest advantage values in a trajectory.
+    """Sampler that yields indices of top-K advantage samples in random order.
 
-    Args:
-        data_source (TrajectoryData): The dataset, which must have a `get_all_advantages` method.
-        num_samples (int): The maximum number of samples to take batches from.
+    Selects the top-K samples with highest absolute advantage values for experience
+    replay. This focuses training on the most impactful samples.
+
+    Attributes:
+        data_source (TrajectoryData): The trajectory dataset.
+        num_samples (int): Maximum number of top samples to include.
     """
     def __init__(self, data_source: 'TrajectoryData', num_samples: int):
         self.data_source = data_source

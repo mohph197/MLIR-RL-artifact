@@ -1,3 +1,10 @@
+"""Action space and transformation action implementations.
+
+This module defines all available transformation actions for loop nest optimization,
+including tiling, parallelization, fusion, interchange, and vectorization. It
+provides the ActionSpace class for action sampling and distribution management.
+"""
+
 from mlir_rl_artifact.utils.config import Config
 from .base import Action
 from .no_transformation import NoTransformation
@@ -23,6 +30,7 @@ class ActionSpace:
         Interchange,
         Vectorization
     ]
+    """List of supported action types."""
 
     @classmethod
     def size(cls):

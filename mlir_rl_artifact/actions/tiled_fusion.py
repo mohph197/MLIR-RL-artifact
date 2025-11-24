@@ -1,3 +1,9 @@
+"""Tiled fusion action for MLIR loop transformations.
+
+This module implements the tiled fusion transformation action, which applies
+tiling and fusion of producer-consumer operations.
+"""
+
 from mlir_rl_artifact.utils.log import print_alert
 from .tiled_parallelization import TiledParallelization
 from mlir_rl_artifact.transforms import transform_TF, transform_tile

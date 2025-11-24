@@ -1,10 +1,14 @@
-# Load environment variables
+"""Evaluation script for trained MLIR RL models.
+
+This module evaluates all trained model checkpoints on benchmark datasets,
+measuring optimization quality through speedup factors and execution times.
+"""
+
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
 load_dotenv('.env.debug')
 
-# Import modules
 import os
 import torch
 import numpy as np
@@ -27,8 +31,12 @@ from time import time
 eval_dir = 'models'
 
 
-def main():
-    # Set random seeds for reproducibility
+def main() -> None:
+    """Execute evaluation of all trained models on benchmark datasets.
+
+    Loads all model checkpoints from the models directory, evaluates each on the
+    benchmark dataset in greedy mode, and logs results.
+    """
     torch.manual_seed(123)
     torch.cuda.manual_seed_all(123)
     np.random.seed(123)

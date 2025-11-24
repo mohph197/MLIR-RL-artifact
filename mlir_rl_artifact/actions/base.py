@@ -1,3 +1,9 @@
+"""Base action classes for MLIR loop transformations.
+
+This module defines the abstract base class for transformation actions and provides
+the action interface that all concrete transformation actions must implement.
+"""
+
 from typing import Optional, overload, Union, Any
 from mlir_rl_artifact.state import OperationState, OperationFeatures
 import torch

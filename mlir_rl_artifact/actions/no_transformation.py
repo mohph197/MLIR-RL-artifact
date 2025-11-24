@@ -1,3 +1,9 @@
+"""No transformation action for MLIR loop transformations.
+
+This module implements the no transformation action, which terminates the
+transformation sequence without applying any changes.
+"""
+
 from typing import Optional
 from mlir_rl_artifact.state import OperationState
 from .base import Action

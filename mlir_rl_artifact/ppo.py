@@ -1,3 +1,10 @@
+"""Proximal Policy Optimization (PPO) training algorithm for MLIR RL.
+
+This module implements the core PPO training loop including trajectory collection,
+policy updates, value function updates, and benchmark evaluation. It manages the
+interaction between the RL environment and the neural network models.
+"""
+
 from datetime import timedelta
 import torch
 from mlir_rl_artifact.env import Env
@@ -18,17 +25,16 @@ from time import time
 from typing import Optional
 
 
-def collect_trajectory(data: Benchmarks, model: Model, step: int):
+def collect_trajectory(data: Benchmarks, model: Model, step: int) -> TrajectoryData:
     """Collect a trajectory using the model and the environment.
 
     Args:
-        model (MyModel): The model to use.
-        env (Env): The environment to use.
-        step (int): The current step of the main loop
-        tmp_exec_data_file (str): The path to the temporary execution data file.
+        data (Benchmarks): The benchmarks dataset.
+        model (Model): The model to use.
+        step (int): The current step of the main loop.
 
     Returns:
-        TrejectoryData: The collected trajectory.
+        TrajectoryData: The collected trajectory.
     """
     dm = DaskManager()
     fl = FileLogger()
@@ -142,16 +148,16 @@ def collect_trajectory(data: Benchmarks, model: Model, step: int):
     return tc.to_trajectory()
 
 
-def ppo_update(trajectory: TrajectoryData, model: Model, optimizer: torch.optim.Optimizer):
-    """Update the model using PPO.
+def ppo_update(trajectory: TrajectoryData, model: Model, optimizer: torch.optim.Optimizer) -> None:
+    """Update the policy and value models using PPO algorithm.
+
+    Performs PPO training on the collected trajectory data by computing policy loss,
+    value loss, and entropy bonus, then updating model parameters via backpropagation.
 
     Args:
-        trajectory (TrajectoryData): The trajectory to use.
+        trajectory (TrajectoryData): The trajectory data collected from environment.
         model (Model): The model to update.
-        optimizer (torch.optim.Optimizer): The optimizer to use.
-
-    Returns:
-        float: The average loss.
+        optimizer (torch.optim.Optimizer): The optimizer for model parameters.
     """
     fl = FileLogger()
     cfg = Config()
@@ -223,13 +229,16 @@ def ppo_update(trajectory: TrajectoryData, model: Model, optimizer: torch.optim.
     print_info(f"PPO fit in {timedelta(seconds=ppo_end - ppo_start)}")
 
 
-def value_update(trajectory: TrajectoryData, model: Model, optimizer: torch.optim.Optimizer):
-    """Update the value model using the trajectory.
+def value_update(trajectory: TrajectoryData, model: Model, optimizer: torch.optim.Optimizer) -> None:
+    """Update the value function model using trajectory data.
+
+    Trains the value model to predict state values by minimizing MSE loss between
+    predicted and computed returns.
 
     Args:
-        trajectory (Trajectory): The trajectory to use.
-        model (Model): The model to update.
-        optimizer (torch.optim.Optimizer): The optimizer to use.
+        trajectory (TrajectoryData): The trajectory data with returns computed.
+        model (Model): The hierarchical model to update.
+        optimizer (torch.optim.Optimizer): The optimizer for value model parameters.
     """
     fl = FileLogger()
     cfg = Config()
@@ -273,13 +282,20 @@ def value_update(trajectory: TrajectoryData, model: Model, optimizer: torch.opti
     print_info(f"Value fit in {timedelta(seconds=value_end - value_start)}")
 
 
-def evaluate_benchmarks(model: Model, data: Benchmarks):
-    """Evaluate the benchmark using the model.
+def evaluate_benchmarks(model: Model, data: Benchmarks) -> tuple[dict[str, int], dict[str, float]]:
+    """Evaluate the model on all benchmarks and measure optimization results.
+
+    Runs the trained model in greedy mode on all benchmarks, applies optimizations,
+    and measures the resulting execution times and speedups.
 
     Args:
-        model (Model): The model to use.
-        env (Env): The environment to use.
-        tmp_exec_data_file (str): The path to the temporary execution data file.
+        model (Model): The trained model to evaluate.
+        data (Benchmarks): The benchmark dataset to evaluate on.
+
+    Returns:
+        tuple[dict[str, int], dict[str, float]]: A tuple containing:
+            - Dictionary mapping benchmark names to execution times (in nanoseconds)
+            - Dictionary mapping benchmark names to speedup factors
     """
     dm = DaskManager()
     fl = FileLogger()
@@ -369,7 +385,26 @@ def evaluate_benchmarks(model: Model, data: Benchmarks):
     return bench_execs, bench_speedups
 
 
-def __execute_states(state: OperationState, exec_data_file: str, benchs: Benchmarks, main_exec_data: Optional[dict[str, dict[str, int]]]):
+def __execute_states(state: OperationState, exec_data_file: str, benchs: Benchmarks, main_exec_data: Optional[dict[str, dict[str, int]]]) -> tuple[list[float], float, Optional[int], bool, float]:
+    """Execute a benchmark with the transformation sequence stored in state.
+
+    Worker function for parallel execution. Initializes environment, applies transformations,
+    and measures execution results.
+
+    Args:
+        state (OperationState): The operation state containing transformation history.
+        exec_data_file (str): Path to the execution cache file.
+        benchs (Benchmarks): The benchmark dataset.
+        main_exec_data (Optional[dict]): Pre-computed execution data.
+
+    Returns:
+        tuple[list[float], float, Optional[int], bool, float]: Contains:
+            - List of rewards for each action in the sequence
+            - Speedup factor (ratio of original to optimized time)
+            - Execution time in nanoseconds (None if execution failed)
+            - Cache miss flag (False if result was cached)
+            - Worker execution time in seconds
+    """
     print_info("Handling benchmark:", state.bench_name, flush=True)
     worker_start = time()
 

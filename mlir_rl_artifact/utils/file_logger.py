@@ -1,3 +1,10 @@
+"""Result logging and file management for training metrics.
+
+This module provides file-based logging for training metrics, model artifacts,
+and execution results. It manages result directories and enables time-series
+metric tracking throughout training.
+"""
+
 from typing import Optional
 from .singleton import Singleton
 from .config import Config

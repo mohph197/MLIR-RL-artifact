@@ -1,3 +1,11 @@
+"""Neural network models for MLIR RL policy and value estimation.
+
+This module implements the deep RL components including the policy model,
+value model, and LSTM-based observation embedding. The policy model outputs action
+distributions for different transformation types, while the value model estimates
+state values for advantage computation.
+"""
+
 import torch
 import torch.nn as nn
 from torch.distributions import Distribution
@@ -8,6 +16,7 @@ from mlir_rl_artifact.utils.config import Config
 
 
 ACTIVATION = nn.ReLU
+"""Default activation function for neural networks."""
 
 
 class HiearchyModel(nn.Module):
@@ -20,17 +29,26 @@ class HiearchyModel(nn.Module):
         self.value_model = ValueModel()
 
     def __call__(self, obs: torch.Tensor, actions_index: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        return super().__call__(obs, actions_index)
-
-    def forward(self, obs: torch.Tensor, actions_index: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        """Forward pass of the model.
+        """Call the forward method.
 
         Args:
             obs (torch.Tensor): The input tensor.
-            actions_index (torch.Tensor): The list of actions.
+            actions_index (torch.Tensor): The indices of actions.
 
         Returns:
-            tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]: The logits of the transformations, parallelizations, tilings, and interchanges.
+            tuple[torch.Tensor, torch.Tensor, torch.Tensor]: The log probabilities of actions, values, and entropies.
+        """
+        return super().__call__(obs, actions_index)
+
+    def forward(self, obs: torch.Tensor, actions_index: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        """Forward pass of the hierarchical model.
+
+        Args:
+            obs (torch.Tensor): The input tensor.
+            actions_index (torch.Tensor): The indices of actions.
+
+        Returns:
+            tuple[torch.Tensor, torch.Tensor, torch.Tensor]: The log probabilities of actions, values, and entropies.
         """
         actions_log_p, entropies = ActionSpace.distributions_stats(self.policy_model(obs), actions_index)
 
@@ -92,10 +110,18 @@ class ValueModel(nn.Module):
         )
 
     def __call__(self, obs: torch.Tensor) -> torch.Tensor:
+        """Call the forward method.
+
+        Args:
+            obs (torch.Tensor): The input tensor.
+
+        Returns:
+            torch.Tensor: The value tensor.
+        """
         return super().__call__(obs)
 
     def forward(self, obs: torch.Tensor) -> torch.Tensor:
-        """Forward pass of the model.
+        """Forward pass of the value model.
 
         Args:
             obs (torch.Tensor): The input tensor.
@@ -156,16 +182,24 @@ class PolicyModel(nn.Module):
             ))
 
     def __call__(self, obs: torch.Tensor) -> list[Optional[Distribution]]:
-        return super().__call__(obs)
-
-    def forward(self, obs: torch.Tensor) -> list[Optional[Distribution]]:
-        """Forward pass of the model.
+        """Call the forward method.
 
         Args:
             obs (torch.Tensor): The input tensor.
 
         Returns:
-            tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]: The logits of the transformations, parallelizations, tilings, and interchanges.
+            list[Optional[Distribution]]: The distributions for each action.
+        """
+        return super().__call__(obs)
+
+    def forward(self, obs: torch.Tensor) -> list[Optional[Distribution]]:
+        """Forward pass of the policy model.
+
+        Args:
+            obs (torch.Tensor): The input tensor.
+
+        Returns:
+            list[Optional[Distribution]]: The distributions for each action.
         """
         embedded = self.backbone(self.lstm(obs))
         actions_logits = [head(embedded) if head else None for head in self.heads]
@@ -194,6 +228,11 @@ class PolicyModel(nn.Module):
 
 
 class LSTMEmbedding(nn.Module):
+    """LSTM-based embedding layer for observation encoding.
+
+    Encodes operation features into a dense embedding using bidirectional LSTM layers.
+    """
+
     def __init__(self):
         super(LSTMEmbedding, self).__init__()
 
@@ -213,9 +252,25 @@ class LSTMEmbedding(nn.Module):
         self.lstm = nn.LSTM(512, embedding_size)
 
     def __call__(self, obs: torch.Tensor) -> torch.Tensor:
+        """Call the forward method.
+
+        Args:
+            obs (torch.Tensor): The input tensor.
+
+        Returns:
+            torch.Tensor: The embedded tensor.
+        """
         return super().__call__(obs)
 
     def forward(self, obs: torch.Tensor) -> torch.Tensor:
+        """Forward pass of the LSTM embedding.
+
+        Args:
+            obs (torch.Tensor): The input tensor.
+
+        Returns:
+            torch.Tensor: The embedded tensor.
+        """
         consumer_feats = Observation.get_part(obs, OpFeatures)
         producer_feats = Observation.get_part(obs, ProducerOpFeatures)
 

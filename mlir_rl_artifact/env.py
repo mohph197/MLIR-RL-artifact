@@ -1,3 +1,11 @@
+"""Reinforcement learning environment for MLIR RL.
+
+This module implements the RL environment that simulates MLIR code transformations.
+It manages the state transitions, reward computation, and execution of transformation
+sequences. The environment tracks operations across benchmarks and evaluates the
+effectiveness of optimizations.
+"""
+
 from mlir_rl_artifact.state import OperationState, BenchmarkFeatures
 from mlir_rl_artifact.benchmarks import Benchmarks
 from typing import Optional
@@ -23,7 +31,8 @@ class Env:
         """Reset the environment.
 
         Args:
-            bench_idx (Optional[int]): The index of the benchmark to set the environement to. If None, a random benchmark is selected. Defaults to None.
+            benchs (Benchmarks): The benchmarks dataset.
+            bench_idx (Optional[int]): The index of the benchmark to set the environment to. If None, a random benchmark is selected. Defaults to None.
 
         Returns:
             OperationState: The initial state of the environment.
@@ -44,10 +53,9 @@ class Env:
             action (Action): The action to take.
 
         Returns:
-            OperationState: The new state.
-            float: The reward of the action.
-            bool: A flag indicating if the operation is done.
-            Optional[float]: The speedup (if the operation is executed successfully) for logging purposes.
+            OperationState: The new state after applying the action. The state's terminal
+                flag is set if the action failed, is terminal, or the truncation step limit
+                is reached.
         """
         # Copy the current state to introduce the changes throughout the function
         next_state = state.copy()
@@ -135,7 +143,6 @@ class Env:
 
         Returns:
             OperationState: The new operation state.
-            torch.Tensor: The observation vector of the new operation state.
         """
         operation_tag = self.benchmark_data.operation_tags[operation_idx]
         operation_features = self.benchmark_data.operations[operation_tag].copy()

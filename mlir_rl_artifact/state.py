@@ -1,3 +1,10 @@
+"""State representation and feature extraction for MLIR operations.
+
+This module provides data structures for representing benchmark and operation states,
+including features like loops, memory accesses, and operation types. It also provides
+functionality for extracting these features from MLIR AST using the AstDumper tool.
+"""
+
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Optional
 from enum import Enum
@@ -13,6 +20,7 @@ if TYPE_CHECKING:
 
 
 class OperationType(Enum):
+    """Enumeration of operation types for MLIR operations."""
     Generic = 'generic'
     Matmul = 'matmul'
     Conv = 'conv'
@@ -23,6 +31,7 @@ class OperationType(Enum):
 
 
 class IteratorType(Enum):
+    """Enumeration of iterator types for loop dimensions."""
     Parallel = 'parallel'
     Reduction = 'reduction'
 

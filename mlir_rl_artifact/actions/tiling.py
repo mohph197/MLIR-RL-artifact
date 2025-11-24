@@ -1,3 +1,9 @@
+"""Tiling action for MLIR loop transformations.
+
+This module implements the tiling transformation action, which applies loop tiling
+to operations with configurable tile sizes.
+"""
+
 from mlir_rl_artifact.state import OperationState
 from mlir_rl_artifact.transforms import transform_tile
 from typing import Optional

@@ -1,3 +1,9 @@
+"""Interchange action for MLIR loop transformations.
+
+This module implements the loop interchange transformation action, which reorders
+loop dimensions using different encoding methods (enumerate, pointers, continuous).
+"""
+
 from mlir_rl_artifact.utils.config import Config
 from .base import Action
 from mlir_rl_artifact.state import OperationState, OperationType
@@ -10,6 +16,7 @@ import math
 
 
 class InterchangeMethod(Enum):
+    """Enumeration of interchange encoding methods."""
     EnumeratedCandidates = 'enumerate'
     LevelsPointers = 'pointers'
     ContinuousEncoding = 'continuous'
@@ -25,6 +32,7 @@ class Interchange(Action):
     # --- constants ---
     method = InterchangeMethod(Config().interchange_mode)
     log_std = torch.nn.Parameter(torch.zeros(1))
+    """Log standard deviation for continuous interchange encoding."""
 
     def __init__(
         self,

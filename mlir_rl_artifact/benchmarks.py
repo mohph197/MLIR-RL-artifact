@@ -1,3 +1,12 @@
+"""Benchmark loading and management module.
+
+This module provides functionality for loading benchmark data
+and extracting features from benchmark code.
+It handles loading MLIR benchmark files, extracting operation features,
+and optionally applying img2col transformations
+for convolutional operations.
+"""
+
 from mlir_rl_artifact.state import BenchmarkFeatures, extract_bench_features_from_code, extract_bench_features_from_file
 from mlir_rl_artifact.transforms import transform_img2col
 from mlir_rl_artifact.utils.config import Config
@@ -54,8 +63,21 @@ class Benchmarks:
                     benchmark_data = extract_bench_features_from_code(bench_name, str(bench_module), root_exec_time)
             self.data.append(benchmark_data)
 
-    def __len__(self):
+    def __len__(self) -> int:
+        """Get the number of benchmarks loaded.
+
+        Returns:
+            int: The total number of benchmarks.
+        """
         return len(self.data)
 
-    def __getitem__(self, idx: int):
+    def __getitem__(self, idx: int) -> BenchmarkFeatures:
+        """Get a benchmark by index.
+
+        Args:
+            idx (int): The index of the benchmark to retrieve.
+
+        Returns:
+            BenchmarkFeatures: The benchmark features at the specified index.
+        """
         return self.data[idx]

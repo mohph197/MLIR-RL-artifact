@@ -1,3 +1,9 @@
+"""Vectorization action for MLIR loop transformations.
+
+This module implements the vectorization transformation action, which applies
+vectorization to operations and handles preprocessing steps like transpose and decompose.
+"""
+
 from mlir_rl_artifact.utils.config import Config
 from .base import Action
 from mlir_rl_artifact.transforms import (

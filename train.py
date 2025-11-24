@@ -1,6 +1,12 @@
+"""Main training script for MLIR RL using PPO.
+
+This module implements the primary training loop for the reinforcement learning system.
+It initializes the models, loads benchmark data, and iterates through PPO training steps
+including trajectory collection, policy updates, and periodic evaluation.
+"""
+
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv(override=True)
 load_dotenv('.env.debug')
 
@@ -25,8 +31,13 @@ from mlir_rl_artifact.utils.file_logger import FileLogger
 from mlir_rl_artifact.utils.gpu_occupier import GPUOccupier
 
 
-def main():
-    # Set random seeds for reproducibility
+def main() -> None:
+    """Execute the main training loop for MLIR RL.
+
+    Initializes the training infrastructure, loads benchmark data, and runs PPO
+    training for the specified number of iterations. Includes periodic model saving
+    and benchmark evaluation.
+    """
     torch.manual_seed(123)
     torch.cuda.manual_seed_all(123)
     np.random.seed(123)

@@ -1,3 +1,10 @@
+"""Observation encoding for operation state representation.
+
+This module provides classes for encoding operation features into observation tensors
+used by the RL policy and value networks. It includes components for operation features,
+producer features, action history, action masks, and loop counts.
+"""
+
 from mlir_rl_artifact.actions import ActionSpace
 from mlir_rl_artifact.state import OperationState, OperationType, IteratorType, OperationFeatures
 import torch
@@ -11,8 +18,10 @@ LS = Config().max_num_stores_loads
 
 
 class ObservationPart:
+    """Abstract base class for observation parts."""
     @classmethod
     def size(cls) -> int:
+        """Get the size of this observation part."""
         raise NotImplementedError
 
     @classmethod
@@ -151,6 +160,7 @@ class OpFeatures(ObservationPart):
 
 
 class ProducerOpFeatures(OpFeatures):
+    """Class representing producer operation features in the observation"""
     @classmethod
     def from_state(cls, state: OperationState) -> torch.Tensor:
         if state.producer_features:
@@ -205,6 +215,7 @@ class Observation:
         NumLoops,
         ActionMask
     ]
+    """List of observation parts."""
 
     @classmethod
     def cumulative_sizes(cls) -> list[int]:

@@ -1,3 +1,9 @@
+"""Tiled parallelization action for MLIR loop transformations.
+
+This module implements the tiled parallelization transformation action, which applies
+tiling with parallelization using forall constructs.
+"""
+
 from .tiling import Tiling
 from mlir_rl_artifact.transforms import transform_tile, transform_TP
 from mlir_rl_artifact.state import OperationState, IteratorType
