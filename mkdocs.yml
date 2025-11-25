@@ -1,19 +1,49 @@
 site_name: MLIR RL
+site_url: https://mohph197.github.io/MLIR-RL-artifact/
+repo_name: mohph197/MLIR-RL-artifact  # The text label (optional, usually the repo name)
+repo_url: https://github.com/mohph197/MLIR-RL-artifact
 theme:
   name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
 
 plugins:
+  - search
   - mkdocstrings:
       handlers:
         python:
-          paths: ["."]
+          inventories:
+          - https://docs.python.org/3/objects.inv
           options:
             docstring_style: google
+            filters: public
+            docstring_options:
+              ignore_init_summary: true
+            merge_init_into_class: true
+            show_symbol_type_heading: true
+            extensions:
+            - dataclasses
 
-nav:
-  - Home: index.md
-  - Entry Points:
-      - Train: scripts/train.md
-      - Evaluate: scripts/evaluate.md
-  - Library:
-      - MLIR RL Artifact: library/mlir_rl_artifact.md
+markdown_extensions:
+  - toc:
+      toc_depth: "2-6"
+      permalink: true
+  - sane_lists

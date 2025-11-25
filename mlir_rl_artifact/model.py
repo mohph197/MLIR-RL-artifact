@@ -16,7 +16,6 @@ from mlir_rl_artifact.utils.config import Config
 
 
 ACTIVATION = nn.ReLU
-"""Default activation function for neural networks."""
 
 
 class HiearchyModel(nn.Module):

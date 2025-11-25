@@ -260,9 +260,6 @@ class Action:
 
         Args:
             module (Module): current code to apply the action on
-
-        Returns:
-            Module: the new transformed code
         """
         raise NotImplementedError
 

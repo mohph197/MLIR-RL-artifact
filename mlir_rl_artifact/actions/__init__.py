@@ -30,7 +30,6 @@ class ActionSpace:
         Interchange,
         Vectorization
     ]
-    """List of supported action types."""
 
     @classmethod
     def size(cls):
