@@ -11,7 +11,7 @@ import sys
 import pytz
 
 try:
-    from dask.distributed import print
+    from distributed import print
 except ImportError:
     pass
 

@@ -31,10 +31,13 @@ plugins:
       handlers:
         python:
           inventories:
-          - https://docs.python.org/3/objects.inv
+          - https://docs.python.org/3.11/objects.inv
+          - https://docs.pytorch.org/docs/2.8/objects.inv
+          - https://docs.dask.org/en/latest/objects.inv
+          - https://distributed.dask.org/en/latest/objects.inv
+          - https://jobqueue.dask.org/en/latest/objects.inv
           options:
             docstring_style: google
-            filters: public
             docstring_options:
               ignore_init_summary: true
             merge_init_into_class: true
