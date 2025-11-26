@@ -1,0 +1,2834 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mohph197.github.io/MLIR-RL-artifact/api_reference/ppo/">
+      
+      
+        <link rel="prev" href="../observation/">
+      
+      
+        <link rel="next" href="../state/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>PPO - MLIR RL</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mlir_rl_artifact.ppo" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="MLIR RL" class="md-header__button md-logo" aria-label="MLIR RL" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MLIR RL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PPO
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mohph197/MLIR-RL-artifact" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mohph197/MLIR-RL-artifact
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MLIR RL" class="md-nav__button md-logo" aria-label="MLIR RL" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MLIR RL
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mohph197/MLIR-RL-artifact" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mohph197/MLIR-RL-artifact
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MLIR RL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Api reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Api reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../benchmarks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmarks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../env/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Env
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../observation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPO
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PPO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.__execute_states" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __execute_states
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.collect_trajectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        collect_trajectory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.evaluate_benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        evaluate_benchmarks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.ppo_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ppo_update
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.value_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        value_update
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trajectory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transforms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transforms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Action Space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/interchange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interchange
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/no_transformation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    No Transformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/tiled_fusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tiled Fusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/tiled_parallelization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tiled Parallelization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/tiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tiling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/vectorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vectorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utils
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Utils
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/bindings_process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bindings Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/dask_manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dask Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/file_logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Logger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/gpu_occupier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Occupier
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/singleton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Singleton
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entry points
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Entry points
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entry_points/evaluate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entry_points/train/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PPO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.__execute_states" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __execute_states
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.collect_trajectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        collect_trajectory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.evaluate_benchmarks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        evaluate_benchmarks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.ppo_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ppo_update
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlir_rl_artifact.ppo.value_update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        value_update
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="ppo">PPO<a class="headerlink" href="#ppo" title="Permanent link">&para;</a></h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="mlir_rl_artifact.ppo"></a>
+    <div class="doc doc-contents first">
+
+        <p>Proximal Policy Optimization (PPO) training algorithm for MLIR RL.</p>
+<p>This module implements the core PPO training loop including trajectory collection,
+policy updates, value function updates, and benchmark evaluation. It manages the
+interaction between the RL environment and the neural network models.</p>
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="mlir_rl_artifact.ppo.__execute_states" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">__execute_states</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">exec_data_file</span><span class="p">,</span> <span class="n">benchs</span><span class="p">,</span> <span class="n">main_exec_data</span><span class="p">)</span></code>
+
+<a href="#mlir_rl_artifact.ppo.__execute_states" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Execute a benchmark with the transformation sequence stored in state.</p>
+<p>Worker function for parallel execution. Initializes environment, applies transformations,
+and measures execution results.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>state</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              OperationState(bench_idx, bench_name, operation_tag, original_operation_features, operation_features, producer_tag, producer_operand_idx, producer_features, transformation_history, terminal)
+
+  
+      dataclass
+   (mlir_rl_artifact.state.OperationState)" href="../state/#mlir_rl_artifact.state.OperationState">OperationState</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The operation state containing transformation history.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>exec_data_file</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/stdtypes.html#str">str</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path to the execution cache file.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>benchs</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              Benchmarks(is_training=True) (mlir_rl_artifact.benchmarks.Benchmarks)" href="../benchmarks/#mlir_rl_artifact.benchmarks.Benchmarks">Benchmarks</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The benchmark dataset.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>main_exec_data</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3.11/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/stdtypes.html#dict">dict</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Pre-computed execution data.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/stdtypes.html#tuple">tuple</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/stdtypes.html#list">list</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/functions.html#float">float</a>], <a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/functions.html#float">float</a>, <a class="autorefs autorefs-external" title="typing.Optional" href="https://docs.python.org/3.11/library/typing.html#typing.Optional">Optional</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/functions.html#int">int</a>], <a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/functions.html#bool">bool</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/functions.html#float">float</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>tuple[list[float], float, Optional[int], bool, float]: Contains:
+- List of rewards for each action in the sequence
+- Speedup factor (ratio of original to optimized time)
+- Execution time in nanoseconds (None if execution failed)
+- Cache miss flag (False if result was cached)
+- Worker execution time in seconds</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlir_rl_artifact/ppo.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__execute_states</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">OperationState</span><span class="p">,</span> <span class="n">exec_data_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">benchs</span><span class="p">:</span> <span class="n">Benchmarks</span><span class="p">,</span> <span class="n">main_exec_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute a benchmark with the transformation sequence stored in state.</span>
+
+<span class="sd">    Worker function for parallel execution. Initializes environment, applies transformations,</span>
+<span class="sd">    and measures execution results.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (OperationState): The operation state containing transformation history.</span>
+<span class="sd">        exec_data_file (str): Path to the execution cache file.</span>
+<span class="sd">        benchs (Benchmarks): The benchmark dataset.</span>
+<span class="sd">        main_exec_data (Optional[dict]): Pre-computed execution data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple[list[float], float, Optional[int], bool, float]: Contains:</span>
+<span class="sd">            - List of rewards for each action in the sequence</span>
+<span class="sd">            - Speedup factor (ratio of original to optimized time)</span>
+<span class="sd">            - Execution time in nanoseconds (None if execution failed)</span>
+<span class="sd">            - Cache miss flag (False if result was cached)</span>
+<span class="sd">            - Worker execution time in seconds</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">print_info</span><span class="p">(</span><span class="s2">&quot;Handling benchmark:&quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">worker_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+    <span class="n">Execution</span><span class="p">(</span><span class="n">exec_data_file</span><span class="p">,</span> <span class="n">main_exec_data</span><span class="p">)</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">Env</span><span class="p">()</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">benchs</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">bench_idx</span><span class="p">)</span>
+    <span class="n">rewards</span><span class="p">,</span> <span class="n">speedup</span><span class="p">,</span> <span class="n">new_exec_time</span><span class="p">,</span> <span class="n">cache_miss</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">apply_and_run_sequence</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">transformation_history</span><span class="p">)</span>
+
+    <span class="n">worker_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">worker_time</span> <span class="o">=</span> <span class="n">worker_end</span> <span class="o">-</span> <span class="n">worker_start</span>
+
+    <span class="k">return</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">speedup</span><span class="p">,</span> <span class="n">new_exec_time</span><span class="p">,</span> <span class="n">cache_miss</span><span class="p">,</span> <span class="n">worker_time</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="mlir_rl_artifact.ppo.collect_trajectory" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">collect_trajectory</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span></code>
+
+<a href="#mlir_rl_artifact.ppo.collect_trajectory" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Collect a trajectory using the model and the environment.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>data</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              Benchmarks(is_training=True) (mlir_rl_artifact.benchmarks.Benchmarks)" href="../benchmarks/#mlir_rl_artifact.benchmarks.Benchmarks">Benchmarks</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The benchmarks dataset.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>model</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              HiearchyModel() (mlir_rl_artifact.model.HiearchyModel)" href="../model/#mlir_rl_artifact.model.HiearchyModel">HiearchyModel</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The model to use.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>step</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/functions.html#int">int</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The current step of the main loop.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>TrajectoryData</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="              TrajectoryData(num_loops, actions_index, obs, next_obs, actions_bev_log_p, rewards, done) (mlir_rl_artifact.trajectory.TrajectoryData)" href="../trajectory/#mlir_rl_artifact.trajectory.TrajectoryData">TrajectoryData</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The collected trajectory.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlir_rl_artifact/ppo.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">collect_trajectory</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Benchmarks</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TrajectoryData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Collect a trajectory using the model and the environment.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (Benchmarks): The benchmarks dataset.</span>
+<span class="sd">        model (Model): The model to use.</span>
+<span class="sd">        step (int): The current step of the main loop.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TrajectoryData: The collected trajectory.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dm</span> <span class="o">=</span> <span class="n">DaskManager</span><span class="p">()</span>
+    <span class="n">fl</span> <span class="o">=</span> <span class="n">FileLogger</span><span class="p">()</span>
+    <span class="n">exe</span> <span class="o">=</span> <span class="n">Execution</span><span class="p">()</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+
+    <span class="n">eps</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="s1">&#39;epsilon&#39;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">exploration</span><span class="p">:</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="n">step</span> <span class="o">/</span> <span class="n">cfg</span><span class="o">.</span><span class="n">nb_iterations</span>
+        <span class="n">final_eps</span> <span class="o">=</span> <span class="mf">0.001</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="n">final_eps</span> <span class="o">+</span> <span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">init_epsilon</span> <span class="o">-</span> <span class="n">final_eps</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">)</span>
+
+    <span class="n">print_info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collecting </span><span class="si">{</span><span class="n">cfg</span><span class="o">.</span><span class="n">bench_count</span><span class="si">}</span><span class="s2"> benchmarks using </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">num_workers</span><span class="si">}</span><span class="s2"> workers...&quot;</span><span class="p">)</span>
+    <span class="n">traj_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+    <span class="c1"># Prepare benchmarks to explore</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))[:</span><span class="n">cfg</span><span class="o">.</span><span class="n">bench_count</span><span class="p">]</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">cfg</span><span class="o">.</span><span class="n">bench_count</span><span class="p">:</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">(</span><span class="n">indices</span> <span class="o">*</span> <span class="n">cfg</span><span class="o">.</span><span class="n">bench_count</span><span class="p">)[:</span><span class="n">cfg</span><span class="o">.</span><span class="n">bench_count</span><span class="p">]</span>
+    <span class="n">envs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Env</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">states</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">OperationState</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">observations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tcs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">TrajectoryCollector</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">Env</span><span class="p">()</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+        <span class="n">envs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+        <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">observations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Observation</span><span class="o">.</span><span class="n">from_state</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="n">tcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TrajectoryCollector</span><span class="p">())</span>
+
+    <span class="k">with</span> <span class="n">GPUOccupier</span><span class="p">()</span><span class="o">.</span><span class="n">gpu_needed</span><span class="p">():</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">active_states</span> <span class="o">:=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">terminal</span><span class="p">]):</span>
+            <span class="c1"># Sample states that are not terminal yet</span>
+            <span class="n">obss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">active_states</span><span class="p">])</span>
+            <span class="n">actions_index</span><span class="p">,</span> <span class="n">actions_bev_log_p</span><span class="p">,</span> <span class="n">entropies</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">obss</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+            <span class="n">actions_index</span><span class="p">,</span> <span class="n">actions_bev_log_p</span><span class="p">,</span> <span class="n">entropies</span> <span class="o">=</span> <span class="n">actions_index</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">actions_bev_log_p</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">entropies</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+            <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train/entropy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">entropies</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+            <span class="c1"># Record data and update states</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">state</span><span class="p">),</span> <span class="n">obs</span><span class="p">,</span> <span class="n">action_index</span><span class="p">,</span> <span class="n">action_bev_log_p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">active_states</span><span class="p">,</span> <span class="n">obss</span><span class="p">,</span> <span class="n">actions_index</span><span class="p">,</span> <span class="n">actions_bev_log_p</span><span class="p">):</span>
+                <span class="n">obs</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+                <span class="c1"># Get action and use it to get next state</span>
+                <span class="n">action</span> <span class="o">=</span> <span class="n">ActionSpace</span><span class="o">.</span><span class="n">action_by_index</span><span class="p">(</span><span class="n">action_index</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+                <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_state</span> <span class="o">=</span> <span class="n">envs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+                <span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_obs</span> <span class="o">=</span> <span class="n">Observation</span><span class="o">.</span><span class="n">from_state</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+
+                <span class="c1"># If the benchmark is not done yet, keep next operation state instead</span>
+                <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="n">next_state</span><span class="o">.</span><span class="n">terminal</span><span class="p">:</span>
+                    <span class="n">next_op_state</span> <span class="o">=</span> <span class="n">envs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_next_op_state</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">next_op_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_op_state</span>
+                        <span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Observation</span><span class="o">.</span><span class="n">from_state</span><span class="p">(</span><span class="n">next_op_state</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="c1"># Record available data</span>
+                <span class="n">tcs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+                    <span class="n">Observation</span><span class="o">.</span><span class="n">get_part</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">NumLoops</span><span class="p">)</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+                    <span class="n">action_index</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                    <span class="n">obs</span><span class="p">,</span>
+                    <span class="n">next_obs</span><span class="p">,</span>
+                    <span class="n">action_bev_log_p</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+                    <span class="mf">0.0</span><span class="p">,</span>  <span class="c1"># This will be filled after execution</span>
+                    <span class="n">done</span>
+                <span class="p">))</span>
+
+    <span class="n">traj_end_sampling</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">map_objs</span><span class="p">(</span><span class="n">__execute_states</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">exe</span><span class="o">.</span><span class="n">main_exec_data</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">obj_str</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">bench_name</span><span class="p">)</span>
+
+    <span class="n">traj_end_exec_states</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="o">.</span><span class="n">failed_seq</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">transformation_history</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">batch_timeout</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span> <span class="k">else</span> <span class="n">r</span>
+        <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">envs</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="n">all_rewards</span><span class="p">,</span> <span class="n">all_speedups</span><span class="p">,</span> <span class="n">all_exec_times</span><span class="p">,</span> <span class="n">cache_misses</span><span class="p">,</span> <span class="n">worker_times</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">results</span><span class="p">))</span>
+    <span class="n">new_cache_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">tc</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">speedup</span><span class="p">,</span> <span class="n">exec_time</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tcs</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">all_rewards</span><span class="p">,</span> <span class="n">all_speedups</span><span class="p">,</span> <span class="n">all_exec_times</span><span class="p">):</span>
+        <span class="c1"># Update trajectory</span>
+        <span class="n">tc</span><span class="o">.</span><span class="n">rewards</span> <span class="o">=</span> <span class="n">rewards</span>
+        <span class="c1"># Log metrics</span>
+        <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train/reward&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">rewards</span><span class="p">)</span>
+        <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train/final_speedup&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">speedup</span><span class="p">)</span>
+        <span class="c1"># Get new cache data</span>
+        <span class="k">if</span> <span class="n">exec_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cache_key</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">get_code_cache_key</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">transformation_history</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">bench_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_cache_data</span><span class="p">:</span>
+                <span class="n">new_cache_data</span><span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">new_cache_data</span><span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="p">][</span><span class="n">cache_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">exec_time</span>
+
+    <span class="n">tc</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tcs</span><span class="p">,</span> <span class="n">TrajectoryCollector</span><span class="p">())</span>
+    <span class="n">exe</span><span class="o">.</span><span class="n">update_execution_cache</span><span class="p">(</span><span class="n">new_cache_data</span><span class="p">)</span>
+
+    <span class="n">traj_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+    <span class="n">sampling_time</span> <span class="o">=</span> <span class="n">traj_end_sampling</span> <span class="o">-</span> <span class="n">traj_start</span>
+    <span class="n">exec_states_time</span> <span class="o">=</span> <span class="n">traj_end_exec_states</span> <span class="o">-</span> <span class="n">traj_end_sampling</span>
+    <span class="n">collection_time</span> <span class="o">=</span> <span class="n">traj_end</span> <span class="o">-</span> <span class="n">traj_start</span>
+    <span class="n">print_info</span><span class="p">((</span>
+        <span class="sa">f</span><span class="s2">&quot;Timings: collection: </span><span class="si">{</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">collection_time</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;, sampling: </span><span class="si">{</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">sampling_time</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;, exec: </span><span class="si">{</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">exec_states_time</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">tc</span><span class="o">.</span><span class="n">to_trajectory</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="mlir_rl_artifact.ppo.evaluate_benchmarks" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">evaluate_benchmarks</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></code>
+
+<a href="#mlir_rl_artifact.ppo.evaluate_benchmarks" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Evaluate the model on all benchmarks and measure optimization results.</p>
+<p>Runs the trained model in greedy mode on all benchmarks, applies optimizations,
+and measures the resulting execution times and speedups.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>model</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              HiearchyModel() (mlir_rl_artifact.model.HiearchyModel)" href="../model/#mlir_rl_artifact.model.HiearchyModel">HiearchyModel</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The trained model to evaluate.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>data</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              Benchmarks(is_training=True) (mlir_rl_artifact.benchmarks.Benchmarks)" href="../benchmarks/#mlir_rl_artifact.benchmarks.Benchmarks">Benchmarks</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The benchmark dataset to evaluate on.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/stdtypes.html#tuple">tuple</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/stdtypes.html#dict">dict</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/functions.html#int">int</a>], <a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/stdtypes.html#dict">dict</a>[<a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/stdtypes.html#str">str</a>, <a class="autorefs autorefs-external" href="https://docs.python.org/3.11/library/functions.html#float">float</a>]]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>tuple[dict[str, int], dict[str, float]]: A tuple containing:
+- Dictionary mapping benchmark names to execution times (in nanoseconds)
+- Dictionary mapping benchmark names to speedup factors</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlir_rl_artifact/ppo.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">evaluate_benchmarks</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Benchmarks</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate the model on all benchmarks and measure optimization results.</span>
+
+<span class="sd">    Runs the trained model in greedy mode on all benchmarks, applies optimizations,</span>
+<span class="sd">    and measures the resulting execution times and speedups.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (Model): The trained model to evaluate.</span>
+<span class="sd">        data (Benchmarks): The benchmark dataset to evaluate on.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple[dict[str, int], dict[str, float]]: A tuple containing:</span>
+<span class="sd">            - Dictionary mapping benchmark names to execution times (in nanoseconds)</span>
+<span class="sd">            - Dictionary mapping benchmark names to speedup factors</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dm</span> <span class="o">=</span> <span class="n">DaskManager</span><span class="p">()</span>
+    <span class="n">fl</span> <span class="o">=</span> <span class="n">FileLogger</span><span class="p">()</span>
+    <span class="n">exe</span> <span class="o">=</span> <span class="n">Execution</span><span class="p">()</span>
+
+    <span class="n">print_info</span><span class="p">(</span><span class="s2">&quot;Evaluation started...&quot;</span><span class="p">)</span>
+    <span class="n">eval_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+
+    <span class="c1"># Prepare benchmarks to explore</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">envs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Env</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">states</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">OperationState</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">observations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">Env</span><span class="p">()</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+        <span class="n">envs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">env</span><span class="p">)</span>
+        <span class="n">states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">observations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Observation</span><span class="o">.</span><span class="n">from_state</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+
+    <span class="k">with</span> <span class="n">GPUOccupier</span><span class="p">()</span><span class="o">.</span><span class="n">gpu_needed</span><span class="p">():</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">active_states</span> <span class="o">:=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">states</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">terminal</span><span class="p">]):</span>
+            <span class="c1"># Sample states that are not terminal yet</span>
+            <span class="n">obss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">active_states</span><span class="p">])</span>
+            <span class="n">actions_index</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">entropies</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">obss</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">greedy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">actions_index</span><span class="p">,</span> <span class="n">entropies</span> <span class="o">=</span> <span class="n">actions_index</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">entropies</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+            <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;eval/entropy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">entropies</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+            <span class="c1"># Record data and update states</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">state</span><span class="p">),</span> <span class="n">obs</span><span class="p">,</span> <span class="n">action_index</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">active_states</span><span class="p">,</span> <span class="n">obss</span><span class="p">,</span> <span class="n">actions_index</span><span class="p">):</span>
+                <span class="n">obs</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+                <span class="c1"># Get action and use it to get next state</span>
+                <span class="n">action</span> <span class="o">=</span> <span class="n">ActionSpace</span><span class="o">.</span><span class="n">action_by_index</span><span class="p">(</span><span class="n">action_index</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+                <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_state</span> <span class="o">=</span> <span class="n">envs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+                <span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Observation</span><span class="o">.</span><span class="n">from_state</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+
+                <span class="c1"># If the benchmark is not done yet, keep next operation state instead</span>
+                <span class="k">if</span> <span class="n">next_state</span><span class="o">.</span><span class="n">terminal</span><span class="p">:</span>
+                    <span class="n">next_op_state</span> <span class="o">=</span> <span class="n">envs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_next_op_state</span><span class="p">(</span><span class="n">next_state</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">next_op_state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">next_op_state</span>
+                        <span class="n">observations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Observation</span><span class="o">.</span><span class="n">from_state</span><span class="p">(</span><span class="n">next_op_state</span><span class="p">)</span>
+
+    <span class="n">print_success</span><span class="p">(</span><span class="s2">&quot;Schedules inferred! Applying optimizations...&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">map_objs</span><span class="p">(</span><span class="n">__execute_states</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">exe</span><span class="o">.</span><span class="n">main_exec_data</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">obj_str</span><span class="o">=</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">bench_name</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="o">.</span><span class="n">failed_seq</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">transformation_history</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">batch_timeout</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span> <span class="k">else</span> <span class="n">r</span>
+        <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">envs</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">all_rewards</span><span class="p">,</span> <span class="n">all_speedups</span><span class="p">,</span> <span class="n">all_exec_times</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">results</span><span class="p">))</span>
+    <span class="n">new_cache_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">bench_execs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">bench_speedups</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">state</span><span class="p">,</span> <span class="n">rewards</span><span class="p">,</span> <span class="n">speedup</span><span class="p">,</span> <span class="n">exec_time</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">states</span><span class="p">,</span> <span class="n">all_rewards</span><span class="p">,</span> <span class="n">all_speedups</span><span class="p">,</span> <span class="n">all_exec_times</span><span class="p">):</span>
+        <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;eval/reward&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">rewards</span><span class="p">)</span>
+        <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;eval/cumulative_reward&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rewards</span><span class="p">))</span>
+        <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;eval/final_speedup&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">speedup</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exec_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fl</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;eval/exec_time/</span><span class="si">{</span><span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exec_time</span><span class="p">)</span>
+            <span class="n">fl</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;eval/speedup/</span><span class="si">{</span><span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">speedup</span><span class="p">)</span>
+            <span class="n">bench_execs</span><span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">exec_time</span>
+            <span class="n">bench_speedups</span><span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">speedup</span>
+            <span class="n">cache_key</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">get_code_cache_key</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">transformation_history</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">bench_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">new_cache_data</span><span class="p">:</span>
+                <span class="n">new_cache_data</span><span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">new_cache_data</span><span class="p">[</span><span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="p">][</span><span class="n">cache_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">exec_time</span>
+
+        <span class="n">print_success</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--------------------&quot;</span><span class="p">,</span> <span class="n">add_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">print_success</span><span class="p">(</span><span class="s2">&quot;Bench:&quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">bench_name</span><span class="p">,</span> <span class="n">add_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">print_success</span><span class="p">(</span><span class="s2">&quot;Transformations:&quot;</span><span class="p">,</span> <span class="n">add_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">op_seq</span> <span class="ow">in</span> <span class="n">state</span><span class="o">.</span><span class="n">transformation_history</span><span class="p">:</span>
+            <span class="n">op_tag</span> <span class="o">=</span> <span class="n">op_seq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">operation_tag</span>
+            <span class="n">print_success</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">op_tag</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">op_seq</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">add_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">print_success</span><span class="p">(</span><span class="s2">&quot;Speedup:&quot;</span><span class="p">,</span> <span class="n">speedup</span><span class="p">,</span> <span class="n">add_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">print_success</span><span class="p">(</span><span class="s2">&quot;Execution time:&quot;</span><span class="p">,</span> <span class="n">exec_time</span><span class="p">,</span> <span class="n">add_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">print_success</span><span class="p">(</span><span class="s2">&quot;--------------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">add_label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_speedups</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;eval/average_speedup&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">all_speedups</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_speedups</span><span class="p">))</span>
+    <span class="n">exe</span><span class="o">.</span><span class="n">update_execution_cache</span><span class="p">(</span><span class="n">new_cache_data</span><span class="p">)</span>
+
+    <span class="n">eval_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">print_info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Evaluation time: </span><span class="si">{</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">eval_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">eval_start</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">bench_execs</span><span class="p">,</span> <span class="n">bench_speedups</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="mlir_rl_artifact.ppo.ppo_update" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">ppo_update</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span></code>
+
+<a href="#mlir_rl_artifact.ppo.ppo_update" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Update the policy and value models using PPO algorithm.</p>
+<p>Performs PPO training on the collected trajectory data by computing policy loss,
+value loss, and entropy bonus, then updating model parameters via backpropagation.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>trajectory</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              TrajectoryData(num_loops, actions_index, obs, next_obs, actions_bev_log_p, rewards, done) (mlir_rl_artifact.trajectory.TrajectoryData)" href="../trajectory/#mlir_rl_artifact.trajectory.TrajectoryData">TrajectoryData</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The trajectory data collected from environment.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>model</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              HiearchyModel() (mlir_rl_artifact.model.HiearchyModel)" href="../model/#mlir_rl_artifact.model.HiearchyModel">HiearchyModel</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The model to update.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>optimizer</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-external" title="torch.optim.Optimizer" href="https://docs.pytorch.org/docs/2.8/optim.html#torch.optim.Optimizer">Optimizer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The optimizer for model parameters.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlir_rl_artifact/ppo.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">ppo_update</span><span class="p">(</span><span class="n">trajectory</span><span class="p">:</span> <span class="n">TrajectoryData</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update the policy and value models using PPO algorithm.</span>
+
+<span class="sd">    Performs PPO training on the collected trajectory data by computing policy loss,</span>
+<span class="sd">    value loss, and entropy bonus, then updating model parameters via backpropagation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        trajectory (TrajectoryData): The trajectory data collected from environment.</span>
+<span class="sd">        model (Model): The model to update.</span>
+<span class="sd">        optimizer (torch.optim.Optimizer): The optimizer for model parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fl</span> <span class="o">=</span> <span class="n">FileLogger</span><span class="p">()</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+
+    <span class="n">trajectory</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="n">ppo_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">data_loader</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">loader</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">ppo_batch_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">ppo_epochs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">data_loader</span><span class="p">:</span>
+            <span class="n">batch</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+            <span class="p">(</span>
+                <span class="n">_</span><span class="p">,</span>
+                <span class="n">actions_index</span><span class="p">,</span>
+                <span class="n">obs</span><span class="p">,</span>
+                <span class="n">_</span><span class="p">,</span>
+                <span class="n">actions_bev_log_p</span><span class="p">,</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span>
+                <span class="n">values</span><span class="p">,</span>
+                <span class="n">_</span><span class="p">,</span>
+                <span class="n">actions_old_log_p</span><span class="p">,</span>
+                <span class="n">off_policy_rates</span><span class="p">,</span>
+                <span class="n">returns</span><span class="p">,</span>
+                <span class="n">advantages</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="n">batch</span>
+            <span class="n">max_abs_adv</span> <span class="o">=</span> <span class="n">advantages</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">normalize_adv</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span> <span class="ow">and</span> <span class="n">advantages</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">advantages</span> <span class="o">=</span> <span class="p">(</span><span class="n">advantages</span> <span class="o">-</span> <span class="n">advantages</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">advantages</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1e-8</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">cfg</span><span class="o">.</span><span class="n">normalize_adv</span> <span class="o">==</span> <span class="s1">&#39;max-abs&#39;</span> <span class="ow">and</span> <span class="n">max_abs_adv</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">advantages</span> <span class="o">=</span> <span class="n">advantages</span> <span class="o">/</span> <span class="n">max_abs_adv</span>
+
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">enable_grad</span><span class="p">():</span>
+                <span class="n">actions_log_p</span><span class="p">,</span> <span class="n">new_values</span><span class="p">,</span> <span class="n">entropies</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">obs</span><span class="p">,</span> <span class="n">actions_index</span><span class="p">)</span>
+
+                <span class="n">policy_loss</span><span class="p">,</span> <span class="n">clip_frac</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">policy_model</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">actions_log_p</span><span class="p">,</span> <span class="n">actions_bev_log_p</span><span class="p">,</span> <span class="n">off_policy_rates</span><span class="p">,</span> <span class="n">advantages</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">policy_loss</span>
+
+                <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">value_epochs</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">value_loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">value_model</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">new_values</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">returns</span><span class="p">)</span>
+                    <span class="n">loss</span> <span class="o">+=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">value_coef</span> <span class="o">*</span> <span class="n">value_loss</span>
+
+                <span class="k">if</span> <span class="s1">&#39;entropy&#39;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">exploration</span><span class="p">:</span>
+                    <span class="n">entropy_loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">entropies</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+                    <span class="n">loss</span> <span class="o">+=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">entropy_coef</span> <span class="o">*</span> <span class="n">entropy_loss</span>
+
+            <span class="n">approx_kl</span> <span class="o">=</span> <span class="p">(</span><span class="n">actions_old_log_p</span> <span class="o">-</span> <span class="n">actions_log_p</span><span class="p">)</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                <span class="n">clip_factor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mf">0.5</span><span class="p">)</span>
+                <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">print_error</span><span class="p">(</span>
+                    <span class="s1">&#39;Error during PPO update</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Logging</span>
+            <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train_ppo/policy_loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">policy_loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train_ppo/clip_frac&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clip_frac</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train_ppo/clip_factor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clip_factor</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train_ppo/approx_kl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">approx_kl</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">cfg</span><span class="o">.</span><span class="n">value_epochs</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train_ppo/value_loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value_loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="k">if</span> <span class="s1">&#39;entropy&#39;</span> <span class="ow">in</span> <span class="n">cfg</span><span class="o">.</span><span class="n">exploration</span><span class="p">:</span>
+                <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train_ppo/entropy_loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entropy_loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+    <span class="n">ppo_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">print_info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PPO fit in </span><span class="si">{</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">ppo_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ppo_start</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="mlir_rl_artifact.ppo.value_update" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <code class="highlight language-python"><span class="n">value_update</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">)</span></code>
+
+<a href="#mlir_rl_artifact.ppo.value_update" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Update the value function model using trajectory data.</p>
+<p>Trains the value model to predict state values by minimizing MSE loss between
+predicted and computed returns.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>trajectory</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              TrajectoryData(num_loops, actions_index, obs, next_obs, actions_bev_log_p, rewards, done) (mlir_rl_artifact.trajectory.TrajectoryData)" href="../trajectory/#mlir_rl_artifact.trajectory.TrajectoryData">TrajectoryData</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The trajectory data with returns computed.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>model</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="              HiearchyModel() (mlir_rl_artifact.model.HiearchyModel)" href="../model/#mlir_rl_artifact.model.HiearchyModel">HiearchyModel</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The hierarchical model to update.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>optimizer</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-external" title="torch.optim.Optimizer" href="https://docs.pytorch.org/docs/2.8/optim.html#torch.optim.Optimizer">Optimizer</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The optimizer for value model parameters.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>mlir_rl_artifact/ppo.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">value_update</span><span class="p">(</span><span class="n">trajectory</span><span class="p">:</span> <span class="n">TrajectoryData</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update the value function model using trajectory data.</span>
+
+<span class="sd">    Trains the value model to predict state values by minimizing MSE loss between</span>
+<span class="sd">    predicted and computed returns.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        trajectory (TrajectoryData): The trajectory data with returns computed.</span>
+<span class="sd">        model (Model): The hierarchical model to update.</span>
+<span class="sd">        optimizer (torch.optim.Optimizer): The optimizer for value model parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fl</span> <span class="o">=</span> <span class="n">FileLogger</span><span class="p">()</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+
+    <span class="n">trajectory</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="n">value_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">data_loader</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">loader</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">value_batch_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cfg</span><span class="o">.</span><span class="n">value_epochs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">data_loader</span><span class="p">:</span>
+            <span class="n">batch</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">]</span>
+            <span class="p">(</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span>
+                <span class="n">obs</span><span class="p">,</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span>
+                <span class="n">values</span><span class="p">,</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span>
+                <span class="n">returns</span><span class="p">,</span>
+                <span class="n">_</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="n">batch</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">enable_grad</span><span class="p">():</span>
+                <span class="n">new_values</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">value_model</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+
+                <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">value_model</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">new_values</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">returns</span><span class="p">)</span>
+
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                <span class="n">clip_factor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mf">0.5</span><span class="p">)</span>
+                <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">print_error</span><span class="p">(</span>
+                    <span class="s1">&#39;Error during Value update</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="sa">f</span><span class="s1">&#39;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Logging</span>
+            <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train_value/loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="n">fl</span><span class="p">[</span><span class="s1">&#39;train_value/clip_factor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clip_factor</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+    <span class="n">value_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">print_info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value fit in </span><span class="si">{</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">value_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">value_start</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

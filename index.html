@@ -1,0 +1,2220 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mohph197.github.io/MLIR-RL-artifact/">
+      
+      
+      
+        <link rel="next" href="api_reference/benchmarks/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>MLIR RL</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#table-of-contents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="MLIR RL" class="md-header__button md-logo" aria-label="MLIR RL" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MLIR RL
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MLIR RL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mohph197/MLIR-RL-artifact" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mohph197/MLIR-RL-artifact
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="MLIR RL" class="md-nav__button md-logo" aria-label="MLIR RL" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    MLIR RL
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mohph197/MLIR-RL-artifact" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mohph197/MLIR-RL-artifact
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MLIR RL
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MLIR RL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1-using-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 1: Using Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2-without-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 2: Without Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Method 2: Without Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action Space
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Normalization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experience-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experience Replay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-hyperparameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training Hyperparameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paper-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paper Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authors
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Api reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Api reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/benchmarks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmarks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/env/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Env
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/execution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Execution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/observation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/ppo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/trajectory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trajectory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/transforms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transforms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/actions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Action Space
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/actions/base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/actions/interchange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interchange
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/actions/no_transformation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    No Transformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/actions/tiled_fusion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tiled Fusion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/actions/tiled_parallelization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tiled Parallelization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/actions/tiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tiling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/actions/vectorization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vectorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utils
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Utils
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/utils/bindings_process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bindings Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/utils/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Config
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/utils/dask_manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dask Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/utils/file_logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    File Logger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/utils/gpu_occupier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GPU Occupier
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/utils/log/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Log
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api_reference/utils/singleton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Singleton
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Entry points
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Entry points
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="entry_points/evaluate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluation Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="entry_points/train/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#method-1-using-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 1: Using Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#method-2-without-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Method 2: Without Docker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Method 2: Without Docker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Action Space
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exploration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exploration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Normalization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#experience-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experience Replay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-hyperparameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training Hyperparameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Sources
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Configuration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Training
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paper-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paper Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authors
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="mlir-rl">MLIR RL<a class="headerlink" href="#mlir-rl" title="Permanent link">&para;</a></h1>
+<p>A deep reinforcement learning system for loop nest optimization in MLIR.</p>
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#method-1-using-docker">Method 1: Using Docker</a></li>
+<li><a href="#method-2-without-docker">Method 2: Without Docker</a></li>
+<li><a href="#data">Data</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#configuration-parameters">Configuration Parameters</a></li>
+<li><a href="#example-configuration">Example Configuration</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#training">Training</a></li>
+<li><a href="#evaluation">Evaluation</a></li>
+<li><a href="#paper-results">Paper Results</a></li>
+<li><a href="#authors">Authors</a></li>
+</ul>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>Start by cloning the repo:</p>
+<pre><code class="language-bash">git clone https://github.com/mohph197/MLIR-RL-artifact.git
+</code></pre>
+<p>Before proceeding, follow the instructions in the <a href="#data">Data</a> section to download and extract the benchmark data files.</p>
+<h3 id="method-1-using-docker">Method 1: Using Docker<a class="headerlink" href="#method-1-using-docker" title="Permanent link">&para;</a></h3>
+<p>Build and run the Docker container:</p>
+<pre><code class="language-bash">cd &lt;/path/to/MLIR-RL-artifact&gt;
+docker build -t mlir-rl-artifact .
+docker run -it mlir-rl-artifact
+</code></pre>
+<h3 id="method-2-without-docker">Method 2: Without Docker<a class="headerlink" href="#method-2-without-docker" title="Permanent link">&para;</a></h3>
+<h4 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Conda or Miniconda</li>
+</ul>
+<h4 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h4>
+<ol>
+<li><strong>Install system dependencies and Conda packages:</strong></li>
+</ol>
+<p>Start by activating a Conda environment, and then install packages as follows:</p>
+<pre><code class="language-bash">conda install -y \
+    python=3.11 \
+    git=2.51.2 \
+    unzip=6.0 \
+    cmake=4.1.2 \
+    ninja=1.13.1 \
+    binutils=2.45 \
+    c-compiler=1.11.0 \
+    cxx-compiler=1.11.0 \
+    clang=21.1.5 \
+    clangxx=21.1.5 \
+    llvm-openmp=21.1.5 \
+    lld=21.1.5 \
+    poetry=2.2.1 \
+    -c conda-forge
+</code></pre>
+<ol start="2">
+<li><strong>Clone and build LLVM/MLIR:</strong></li>
+</ol>
+<pre><code class="language-bash">git clone --branch release/19.x --depth 1 https://github.com/llvm/llvm-project.git
+
+cd &lt;path/to/llvm-project&gt;
+pip install -r mlir/python/requirements.txt
+cmake -S llvm -B build -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLLVM_ENABLE_PROJECTS=mlir \
+    -DLLVM_TARGETS_TO_BUILD=X86 \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DLLVM_ENABLE_LLD=ON \
+    -DMLIR_ENABLE_BINDINGS_PYTHON=ON
+cmake --build build --target check-mlir -j
+cmake --build build --target check-mlir-python -j
+</code></pre>
+<ol start="3">
+<li><strong>Set environment variables:</strong></li>
+</ol>
+<pre><code class="language-bash">export PATH=&quot;&lt;path/to/llvm-project&gt;/build/bin:$PATH&quot;
+export PYTHONPATH=&quot;&lt;/path/to/llvm-project&gt;/build/tools/mlir/python_packages/mlir_core&quot;
+export LLVM_BUILD_PATH=&quot;&lt;/path/to/llvm-project&gt;/build&quot;
+export MLIR_SHARED_LIBS=&quot;&lt;/path/to/llvm-project&gt;/build/lib/libmlir_runner_utils.so,&lt;/path/to/llvm-project&gt;/build/lib/libmlir_c_runner_utils.so,$CONDA_PREFIX/lib/libomp.so&quot;
+</code></pre>
+<ol start="4">
+<li><strong>Build custom tools:</strong></li>
+</ol>
+<pre><code class="language-bash">cd &lt;/path/to/MLIR-RL-artifact&gt;/tools
+cmake -S ast_dumper -B ast_dumper/build -G Ninja \
+    -DMLIR_DIR=$LLVM_BUILD_PATH/lib/cmake/mlir \
+    -DLLVM_EXTERNAL_LIT=$LLVM_BUILD_PATH/bin/llvm-lit \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++
+cmake --build ast_dumper/build -j
+
+cmake -S pre_vec -B pre_vec/build -G Ninja \
+    -DMLIR_DIR=$LLVM_BUILD_PATH/lib/cmake/mlir \
+    -DLLVM_EXTERNAL_LIT=$LLVM_BUILD_PATH/bin/llvm-lit \
+    -DCMAKE_C_COMPILER=clang \
+    -DCMAKE_CXX_COMPILER=clang++
+cmake --build pre_vec/build -j
+</code></pre>
+<ol start="5">
+<li><strong>Create <code>.env</code> file:</strong></li>
+</ol>
+<pre><code class="language-shell">AST_DUMPER_BIN_PATH=&quot;&lt;/path/to/MLIR-RL-artifact&gt;/tools/ast_dumper/build/bin/AstDumper&quot;
+PRE_VEC_BIN_PATH=&quot;&lt;/path/to/MLIR-RL-artifact&gt;/tools/pre_vec/build/bin/PreVec&quot;
+MLIR_SHARED_LIBS=&quot;&lt;/path/to/llvm-project&gt;/build/lib/libmlir_runner_utils.so,&lt;/path/to/llvm-project&gt;/build/lib/libmlir_c_runner_utils.so,&lt;/path/to/conda-env&gt;/lib/libomp.so&quot;
+OMP_NUM_THREADS=12
+</code></pre>
+<p>The path to conda environment can be found by running <code>echo $CONDA_PREFIX</code>.</p>
+<ol start="6">
+<li><strong>Install Python dependencies:</strong></li>
+</ol>
+<pre><code class="language-bash">cd &lt;/path/to/MLIR-RL-artifact&gt;
+poetry install
+</code></pre>
+<ol start="7">
+<li><strong>Enable Execution of Scripts:</strong></li>
+</ol>
+<pre><code class="language-bash">chmod +x scripts/*.sh
+</code></pre>
+<h2 id="data">Data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h2>
+<p>Download the benchmarks file from <a href="https://nyu.box.com/shared/static/5y1ilrccu3443dhcr854dt23uv0fysym.zip">file link</a> and place it in the <code>data/</code> directory.</p>
+<p>Extract the benchmark files:</p>
+<pre><code class="language-bash">cd data
+unzip code_files.zip
+cd ..
+</code></pre>
+<p>The <code>data/</code> directory contains execution time JSON files that specify baseline execution times (in nanoseconds) and determine which benchmarks to use:</p>
+<ul>
+<li><code>execution_times_train.json</code> - Training benchmark set</li>
+<li><code>execution_times_eval.json</code> - Evaluation benchmark set</li>
+<li><code>execution_times_eval_full.json</code> - Full models evaluation benchmarks</li>
+<li><code>execution_times_eval_nn.json</code> - Neural networks single operators evaluation benchmarks</li>
+<li><code>execution_times_eval_lqcd.json</code> - Lattice QCD evaluation benchmarks</li>
+</ul>
+<p>These files have the format:</p>
+<pre><code class="language-json">{
+  &quot;benchmark_name&quot;: baseline_execution_time_ns,
+  ...
+}
+</code></pre>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<p>Configuration files are located in <code>config/</code> and control all aspects of training and evaluation. The system uses the config file specified by the <code>CONFIG_FILE_PATH</code> environment variable.</p>
+<h3 id="configuration-parameters">Configuration Parameters<a class="headerlink" href="#configuration-parameters" title="Permanent link">&para;</a></h3>
+<h4 id="model-architecture">Model Architecture<a class="headerlink" href="#model-architecture" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>max_num_stores_loads</code> (int): Maximum number of load/store operations in nested loops</li>
+<li><code>max_num_loops</code> (int): Maximum number of nested loops</li>
+<li><code>max_num_load_store_dim</code> (int): Maximum number of dimensions in load/store buffers</li>
+<li><code>num_tile_sizes</code> (int): Number of tile sizes to consider</li>
+<li><code>vect_size_limit</code> (int): Vectorization size limit to prevent excessive vectorization</li>
+</ul>
+<h4 id="action-space">Action Space<a class="headerlink" href="#action-space" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>order</code> (list[list[str]]): Enforced sequence of actions. Each inner list specifies allowed actions at that step:</li>
+<li>Action symbols: <code>I</code> (Interchange), <code>T</code> (Tiling), <code>TP</code> (TiledParallelization), <code>TF</code> (TiledFusion), <code>V</code> (Vectorization), <code>NT</code> (NoTransformation)</li>
+<li><code>!</code>: Special symbol meaning "Allow everything, except these actions", e.g. <code>["!", "I", "NT"]</code> means "Allow everything, except Interchange and NoTransformation"</li>
+<li><code>interchange_mode</code> ("enumerate" | "pointers" | "continuous"): Method for sampling interchange actions</li>
+</ul>
+<h4 id="exploration">Exploration<a class="headerlink" href="#exploration" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>exploration</code> (list): List of exploration strategies - <code>["entropy"]</code> or <code>["epsilon"]</code> or both</li>
+<li><code>init_epsilon</code> (float): Initial epsilon value for epsilon-greedy exploration (decays over training)</li>
+</ul>
+<h4 id="normalization">Normalization<a class="headerlink" href="#normalization" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>normalize_bounds</code> ("none" | "max" | "log"): How to normalize loop bounds in the input</li>
+<li><code>normalize_adv</code> ("none" | "standard" | "max-abs"): Advantage normalization method for PPO</li>
+</ul>
+<h4 id="experience-replay">Experience Replay<a class="headerlink" href="#experience-replay" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>reuse_experience</code> ("none" | "random" | "topk"): Experience replay strategy</li>
+<li><code>replay_count</code> (int): Number of trajectories to keep in replay buffer</li>
+</ul>
+<h4 id="training-hyperparameters">Training Hyperparameters<a class="headerlink" href="#training-hyperparameters" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>bench_count</code> (int): Number of collected benchmarks per training iteration</li>
+<li><code>nb_iterations</code> (int): Total number of training iterations</li>
+<li><code>ppo_epochs</code> (int): Number of PPO update epochs per iteration</li>
+<li><code>ppo_batch_size</code> (int): Batch size for PPO updates</li>
+<li><code>value_epochs</code> (int): Number of value function update epochs (0 to update with policy)</li>
+<li><code>value_batch_size</code> (int): Batch size for value function updates</li>
+<li><code>value_coef</code> (float): Value loss coefficient in combined loss</li>
+<li><code>value_clip</code> (bool): Whether to clip value function loss</li>
+<li><code>entropy_coef</code> (float): Entropy bonus coefficient for exploration</li>
+<li><code>lr</code> (float): Learning rate for Adam optimizer</li>
+<li><code>truncate</code> (int): Maximum number of transformation steps per operation</li>
+</ul>
+<h4 id="data-sources">Data Sources<a class="headerlink" href="#data-sources" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>benchmarks_folder_path</code> (str): Path to directory containing <code>.mlir</code> benchmark files</li>
+<li><code>json_file</code> (str): Path to training execution times JSON file</li>
+<li><code>eval_json_file</code> (str): Path to evaluation execution times JSON file</li>
+</ul>
+<h4 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>results_dir</code> (str): Directory where results will be saved</li>
+<li><code>tags</code> (list[str]): Optional tags for experiment tracking</li>
+<li><code>debug</code> (bool): Enable debug mode</li>
+<li><code>main_exec_data_file</code> (str): Path to global execution cache file (optional)</li>
+</ul>
+<h3 id="example-configuration">Example Configuration<a class="headerlink" href="#example-configuration" title="Permanent link">&para;</a></h3>
+<pre><code class="language-json">{
+  &quot;max_num_stores_loads&quot;: 7,
+  &quot;max_num_loops&quot;: 12,
+  &quot;max_num_load_store_dim&quot;: 12,
+  &quot;num_tile_sizes&quot;: 7,
+  &quot;vect_size_limit&quot;: 512,
+  &quot;order&quot;: [[&quot;I&quot;], [&quot;!&quot;, &quot;I&quot;, &quot;NT&quot;], [&quot;!&quot;, &quot;I&quot;], [&quot;V&quot;, &quot;NT&quot;]],
+  &quot;interchange_mode&quot;: &quot;pointers&quot;,
+  &quot;exploration&quot;: [&quot;entropy&quot;],
+  &quot;init_epsilon&quot;: 0.0,
+  &quot;normalize_bounds&quot;: &quot;max&quot;,
+  &quot;normalize_adv&quot;: &quot;standard&quot;,
+  &quot;reuse_experience&quot;: &quot;none&quot;,
+  &quot;benchmarks_folder_path&quot;: &quot;data/code_files&quot;,
+  &quot;bench_count&quot;: 64,
+  &quot;replay_count&quot;: 0,
+  &quot;nb_iterations&quot;: 20000,
+  &quot;ppo_epochs&quot;: 4,
+  &quot;ppo_batch_size&quot;: 64,
+  &quot;value_epochs&quot;: 0,
+  &quot;value_batch_size&quot;: 0,
+  &quot;value_coef&quot;: 0.5,
+  &quot;value_clip&quot;: false,
+  &quot;entropy_coef&quot;: 0.01,
+  &quot;lr&quot;: 0.001,
+  &quot;truncate&quot;: 5,
+  &quot;json_file&quot;: &quot;data/execution_times_train.json&quot;,
+  &quot;eval_json_file&quot;: &quot;data/execution_times_eval.json&quot;,
+  &quot;tags&quot;: [],
+  &quot;debug&quot;: false,
+  &quot;main_exec_data_file&quot;: &quot;&quot;,
+  &quot;results_dir&quot;: &quot;results&quot;
+}
+</code></pre>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="training">Training<a class="headerlink" href="#training" title="Permanent link">&para;</a></h3>
+<p>Train the RL model:</p>
+<pre><code class="language-bash">./scripts/train.sh
+</code></pre>
+<p>Results will be saved to <code>results/run_&lt;id&gt;/</code>:</p>
+<ul>
+<li><strong>Model snapshots</strong>: <code>results/run_&lt;id&gt;/models/</code> - Model checkpoints saved every 5 iterations</li>
+<li><strong>Logs</strong>: <code>results/run_&lt;id&gt;/log/</code> - Training metrics including speedups, losses, rewards, and entropy values</li>
+</ul>
+<h3 id="evaluation">Evaluation<a class="headerlink" href="#evaluation" title="Permanent link">&para;</a></h3>
+<p>Evaluate saved models:</p>
+<pre><code class="language-bash">./scripts/evaluate.sh
+</code></pre>
+<p>This command will evaluate all saved models in the <code>models/</code> directory.</p>
+<p>Results will be saved to <code>results/run_&lt;id&gt;/</code>:</p>
+<ul>
+<li><strong>Evaluation logs</strong>: <code>results/run_&lt;id&gt;/log/</code> - Speedup metrics for each evaluated model</li>
+</ul>
+<h3 id="paper-results">Paper Results<a class="headerlink" href="#paper-results" title="Permanent link">&para;</a></h3>
+<p>Evaluate the latest model in the <code>models/</code> directory on the evaluation benchmarks from the paper:</p>
+<pre><code class="language-bash">./scripts/paper.sh
+</code></pre>
+<p>Results will be saved to <code>paper/results/</code> as a JSON file in the format:</p>
+<pre><code class="language-json">{
+  &quot;benchmark_name_1&quot;: speedup_value,
+  &quot;benchmark_name_2&quot;: speedup_value,
+  ...
+}
+</code></pre>
+<h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Mohammed Tirichine (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#107;&#109;&#95;&#116;&#105;&#114;&#105;&#99;&#104;&#105;&#110;&#101;&#64;&#101;&#115;&#105;&#46;&#100;&#122;">&#107;&#109;&#95;&#116;&#105;&#114;&#105;&#99;&#104;&#105;&#110;&#101;&#64;&#101;&#115;&#105;&#46;&#100;&#122;</a>)</li>
+<li>Nassim Ameur (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#107;&#110;&#95;&#97;&#109;&#101;&#117;&#114;&#64;&#101;&#115;&#105;&#46;&#100;&#122;">&#107;&#110;&#95;&#97;&#109;&#101;&#117;&#114;&#64;&#101;&#115;&#105;&#46;&#100;&#122;</a>)</li>
+<li>Iheb Nassim Aouadj (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#110;&#97;&#115;&#115;&#105;&#109;&#105;&#104;&#101;&#98;&#46;&#97;&#111;&#117;&#97;&#100;&#106;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#110;&#97;&#115;&#115;&#105;&#109;&#105;&#104;&#101;&#98;&#46;&#97;&#111;&#117;&#97;&#100;&#106;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>)</li>
+<li>Nazim Bendib (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#110;&#95;&#98;&#101;&#110;&#100;&#105;&#98;&#64;&#101;&#115;&#105;&#46;&#100;&#122;">&#106;&#110;&#95;&#98;&#101;&#110;&#100;&#105;&#98;&#64;&#101;&#115;&#105;&#46;&#100;&#122;</a>)</li>
+<li>Bouchama Djad (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#98;&#111;&#117;&#99;&#104;&#97;&#109;&#97;&#100;&#106;&#97;&#100;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#98;&#111;&#117;&#99;&#104;&#97;&#109;&#97;&#100;&#106;&#97;&#100;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>)</li>
+<li>Rafik Bouloudene (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#114;&#97;&#102;&#105;&#107;&#111;&#98;&#111;&#117;&#108;&#111;&#117;&#100;&#101;&#110;&#101;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#114;&#97;&#102;&#105;&#107;&#111;&#98;&#111;&#117;&#108;&#111;&#117;&#100;&#101;&#110;&#101;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>)</li>
+<li>Riyadh Baghdadi (<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#98;&#97;&#103;&#104;&#100;&#97;&#100;&#105;&#64;&#110;&#121;&#117;&#46;&#101;&#100;&#117;">&#98;&#97;&#103;&#104;&#100;&#97;&#100;&#105;&#64;&#110;&#121;&#117;&#46;&#101;&#100;&#117;</a>)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": [], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
