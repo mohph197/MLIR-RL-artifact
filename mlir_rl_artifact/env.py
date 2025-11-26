@@ -13,7 +13,7 @@ from mlir_rl_artifact.execution import Execution
 from mlir_rl_artifact.actions import Action, TiledFusion
 from mlir_rl_artifact.utils.log import print_error
 from mlir_rl_artifact.utils.config import Config
-from mlir.ir import Context, Module
+from mlir._mlir_libs._mlir.ir import Context, Module  # type: ignore
 import random
 import math
 import traceback

@@ -11,7 +11,7 @@ from mlir_rl_artifact.transforms import (
     transform_decompose, transform_transpose_conv_2d
 )
 from mlir_rl_artifact.state import OperationFeatures, OperationState, OperationType
-from mlir.ir import Module
+from mlir._mlir_libs._mlir.ir import Module  # type: ignore
 from typing import Callable, Optional
 
 

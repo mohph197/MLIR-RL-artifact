@@ -10,7 +10,7 @@ import ctypes
 import ctypes.util
 from statistics import median
 import numpy as np
-from mlir.ir import Module, MemRefType, IntegerType, F64Type, F32Type
+from mlir._mlir_libs._mlir.ir import Module, MemRefType, IntegerType, F64Type, F32Type  # type: ignore
 from mlir.execution_engine import ExecutionEngine
 from mlir.runtime import get_ranked_memref_descriptor, make_nd_memref_descriptor, as_ctype, ranked_memref_to_numpy
 from mlir.passmanager import PassManager

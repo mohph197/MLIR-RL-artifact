@@ -36,6 +36,7 @@ plugins:
           - https://docs.dask.org/en/latest/objects.inv
           - https://distributed.dask.org/en/latest/objects.inv
           - https://jobqueue.dask.org/en/latest/objects.inv
+          - https://mlir.llvm.org/python-bindings/objects.inv
           options:
             docstring_style: google
             docstring_options:

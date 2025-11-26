@@ -10,7 +10,7 @@ for convolutional operations.
 from mlir_rl_artifact.state import BenchmarkFeatures, extract_bench_features_from_code, extract_bench_features_from_file
 from mlir_rl_artifact.transforms import transform_img2col
 from mlir_rl_artifact.utils.config import Config
-from mlir.ir import Context, Module
+from mlir._mlir_libs._mlir.ir import Context, Module  # type: ignore
 import json
 from tqdm import tqdm
 import os

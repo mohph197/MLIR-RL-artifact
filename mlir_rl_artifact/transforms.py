@@ -7,7 +7,7 @@ with the MLIR transform dialect for specifying and applying transformations.
 
 import os
 import subprocess
-from mlir.ir import Module
+from mlir._mlir_libs._mlir.ir import Module  # type: ignore
 from mlir.dialects.transform import interpreter
 from mlir_rl_artifact.utils.bindings_process import BindingsProcess
 

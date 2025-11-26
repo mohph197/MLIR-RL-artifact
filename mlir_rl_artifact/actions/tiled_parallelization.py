@@ -7,7 +7,7 @@ tiling with parallelization using forall constructs.
 from .tiling import Tiling
 from mlir_rl_artifact.transforms import transform_tile, transform_TP
 from mlir_rl_artifact.state import OperationState, IteratorType
-from mlir.ir import Module
+from mlir._mlir_libs._mlir.ir import Module  # type: ignore
 from typing import Optional
 
 
