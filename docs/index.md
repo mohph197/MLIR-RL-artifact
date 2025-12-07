@@ -1,21 +1,11 @@
-# MLIR RL
+---
+hide:
+  - navigation
+---
 
-A deep reinforcement learning system for loop nest optimization in MLIR.
+# Home
 
-## Table of Contents
-
-- [Installation](#installation)
-  - [Method 1: Using Docker](#method-1-using-docker)
-  - [Method 2: Without Docker](#method-2-without-docker)
-- [Data](#data)
-- [Configuration](#configuration)
-  - [Configuration Parameters](#configuration-parameters)
-  - [Example Configuration](#example-configuration)
-- [Usage](#usage)
-  - [Training](#training)
-  - [Evaluation](#evaluation)
-  - [Paper Results](#paper-results)
-- [Authors](#authors)
+<h2>A deep reinforcement learning system for loop nest optimization in MLIR</h2>
 
 ## Installation
 

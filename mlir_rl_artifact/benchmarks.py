@@ -19,7 +19,11 @@ from mlir_rl_artifact.utils.log import print_alert
 
 
 class Benchmarks:
-    """A class that holds benchmarks data"""
+    """A class that holds benchmarks data
+
+    Attributes:
+        data: The list containing features of loaded benchmarks
+    """
 
     data: list[BenchmarkFeatures]
 
@@ -27,7 +31,7 @@ class Benchmarks:
         """Load benchmarks
 
         Args:
-            is_training (bool): Whether to load train or evaluation set
+            is_training: Whether to load train or evaluation set
         """
         cfg = Config()
         # Load benchmark names and execution times from json file
@@ -67,7 +71,7 @@ class Benchmarks:
         """Get the number of benchmarks loaded.
 
         Returns:
-            int: The total number of benchmarks.
+            The total number of benchmarks.
         """
         return len(self.data)
 
@@ -75,9 +79,9 @@ class Benchmarks:
         """Get a benchmark by index.
 
         Args:
-            idx (int): The index of the benchmark to retrieve.
+            idx: The index of the benchmark to retrieve.
 
         Returns:
-            BenchmarkFeatures: The benchmark features at the specified index.
+            The benchmark features at the specified index.
         """
         return self.data[idx]

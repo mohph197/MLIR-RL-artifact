@@ -1,7 +1,14 @@
 """Evaluation script for trained MLIR RL models.
 
-This module evaluates all trained model checkpoints on benchmark datasets,
-measuring optimization quality through speedup factors and execution times.
+This module evaluates all trained model checkpoints found in the `models`
+directory on benchmark datasets, measuring optimization quality through
+speedup factors and execution times.
+
+Execution command:
+
+```bash
+CONFIG_FILE_PATH=path/to/config.json poetry run evaluate
+```
 """
 
 from dotenv import load_dotenv
@@ -31,12 +38,7 @@ from time import time
 eval_dir = 'models'
 
 
-def main() -> None:
-    """Execute evaluation of all trained models on benchmark datasets.
-
-    Loads all model checkpoints from the models directory, evaluates each on the
-    benchmark dataset in greedy mode, and logs results.
-    """
+def main():
     torch.manual_seed(123)
     torch.cuda.manual_seed_all(123)
     np.random.seed(123)

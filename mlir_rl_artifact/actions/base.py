@@ -35,7 +35,7 @@ class Action:
         """Initialize action dependent on state but without parameters
 
         Args:
-            state (OperationState): current state to apply the action on
+            state: current state to apply the action on
         """
         ...
 
@@ -44,7 +44,7 @@ class Action:
         """Initialize action with parameters
 
         Args:
-            parameters (list[int]): list of parameters for the action
+            parameters: list of parameters for the action
         """
         ...
 
@@ -53,8 +53,8 @@ class Action:
         """Initialize action with unprocessed parameters
 
         Args:
-            parameters (list[int]): list of parameters for the action
-            state (OperationState): current state to apply the action on
+            parameters: list of parameters for the action
+            state: current state to apply the action on
         """
         ...
 
@@ -98,11 +98,11 @@ class Action:
         """Create an action from a string representation
 
         Args:
-            state (OperationState): current state to apply the action on
-            action_str (str): string representation of the action
+            state: current state to apply the action on
+            action_str: string representation of the action
 
         Returns:
-            Action: action created from the string representation
+            action created from the string representation
         """
         symbol = action_str.split('(')[0]
         if symbol != cls.symbol:
@@ -118,7 +118,7 @@ class Action:
         """Return the size of the parameters in the index for this action type
 
         Returns:
-            int: size of the parameters for this action type
+            size of the parameters for this action type
         """
         return 0
 
@@ -127,7 +127,7 @@ class Action:
         """Return the size of the network output for this action type
 
         Returns:
-            int: size of the network output for this action type
+            size of the network output for this action type
         """
         return 0
 
@@ -136,7 +136,7 @@ class Action:
         """Return the size of the mask for this action type
 
         Returns:
-            int: size of the mask for this action type
+            size of the mask for this action type
         """
         return cls.network_output_size()
 
@@ -145,7 +145,7 @@ class Action:
         """Return the size of the history for this action type
 
         Returns:
-            int: size of the history for this action type
+            size of the history for this action type
         """
         return 0
 
@@ -154,10 +154,10 @@ class Action:
         """Check if this action type is allowed in the current state
 
         Args:
-            state (OperationState): current state to check the action on
+            state: current state to check the action on
 
         Returns:
-            bool: True if the action is allowed, False otherwise
+            True if the action is allowed, False otherwise
         """
         return True
 
@@ -166,10 +166,10 @@ class Action:
         """Return the action mask for this action type in the current state
 
         Args:
-            state (OperationState): current state to check the action on
+            state: current state to check the action on
 
         Returns:
-            Optional[torch.Tensor]: action mask for this action type, or None if not applicable
+            action mask for this action type, or None if not applicable
         """
         return None
 
@@ -178,10 +178,10 @@ class Action:
         """Return the action history for this action type in the current state
 
         Args:
-            seq (list[Action]): sequence of actions in the current state
+            seq: sequence of actions in the current state
 
         Returns:
-            Optional[torch.Tensor]: action history for this action type, or None if not applicable
+            action history for this action type, or None if not applicable
         """
         return None
 
@@ -190,10 +190,10 @@ class Action:
         """Create a distribution for this action type based on the logits
 
         Args:
-            logits (torch.Tensor): Logits for the action selection.
+            logits: Logits for the action selection.
 
         Returns:
-            Distribution: A distribution object for this action type.
+            A distribution object for this action type.
         """
         raise NotImplementedError
 
@@ -202,11 +202,11 @@ class Action:
         """Create a uniform distribution for this action type based on the logits and number of loops
 
         Args:
-            logits (torch.Tensor): Logits for the action selection.
-            num_loops (torch.Tensor): Number of loops in the operation state.
+            logits: Logits for the action selection.
+            num_loops: Number of loops in the operation state.
 
         Returns:
-            Distribution: A uniform distribution object for this action type.
+            A uniform distribution object for this action type.
         """
         return cls.distribution(logits)
 
@@ -215,13 +215,13 @@ class Action:
         """Calculate the log probabilities and entropies for the distribution
 
         Args:
-            distribution (Distribution): The distribution to calculate stats for.
-            eps_distribution (Distribution): The epsilon distribution for exploration.
-            index (torch.Tensor): The params index.
-            eps (Optional[float]): Epsilon value for exploration. Defaults to None.
+            distribution: The distribution to calculate stats for.
+            eps_distribution: The epsilon distribution for exploration.
+            index: The params index.
+            eps: Epsilon value for exploration. Defaults to None.
 
         Returns:
-            tuple[torch.Tensor, torch.Tensor]: Log probabilities and entropies.
+            Log probabilities and entropies.
         """
         raise NotImplementedError
 
@@ -230,14 +230,14 @@ class Action:
         """Sample an action based on the distribution
 
         Args:
-            distribution (Distribution): The distribution to sample from.
-            eps_distribution (Distribution): The epsilon distribution for exploration.
-            num_loops (torch.Tensor): Number of loops in the operation state.
-            uniform (bool): Whether to sample uniformly.
-            greedy (bool): Whether to sample greedily.
+            distribution: The distribution to sample from.
+            eps_distribution: The epsilon distribution for exploration.
+            num_loops: Number of loops in the operation state.
+            uniform: Whether to sample uniformly.
+            greedy: Whether to sample greedily.
 
         Returns:
-            torch.Tensor: Sampled action index.
+            Sampled action index.
         """
         raise NotImplementedError
 
@@ -245,10 +245,10 @@ class Action:
         """Apply action on the current code
 
         Args:
-            module (Module): current code to apply the action on
+            module: current code to apply the action on
 
         Returns:
-            Module: the new transformed code
+            the new transformed code
         """
         if not self.ready:
             return
@@ -259,7 +259,7 @@ class Action:
         """Apply action that is guarenteed to be ready on the current state
 
         Args:
-            module (Module): current code to apply the action on
+            module: current code to apply the action on
         """
         raise NotImplementedError
 
@@ -267,9 +267,9 @@ class Action:
         """Update the operation features based on the action
 
         Args:
-            operation_features (OperationFeatures): The operation features to update.
+            operation_features: The operation features to update.
 
         Returns:
-            OperationFeatures: The updated operation features.
+            The updated operation features.
         """
         return operation_features

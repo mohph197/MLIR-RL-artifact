@@ -15,7 +15,7 @@ from mlir.execution_engine import ExecutionEngine
 from mlir.runtime import get_ranked_memref_descriptor, make_nd_memref_descriptor, as_ctype, ranked_memref_to_numpy
 from mlir.passmanager import PassManager
 from mlir.dialects.func import FuncOp
-from typing import TYPE_CHECKING, Optional, overload
+from typing import TYPE_CHECKING, Optional, Protocol, overload
 from mlir_rl_artifact.transforms import transform_bufferize_and_lower_v
 from mlir_rl_artifact.utils.bindings_process import BindingsProcess
 from mlir_rl_artifact.utils.singleton import Singleton
@@ -25,14 +25,42 @@ if TYPE_CHECKING:
     from mlir_rl_artifact.actions import Action
 
 
+class OutputsStructure(Protocol):
+    """Placeholder for structure used as output of MLIR execution.
+
+    Note:
+        Used for type hinting only. The actual structure is defined
+        inside [create_params()][..Execution.__create_params].
+
+    Attributes:
+        delta: Execution time in nanoseconds.
+    """
+
+    delta: int
+
+    def get_results(self) -> list[np.ndarray]:
+        """Returns the output arrays as numpy arrays
+
+        Returns:
+            List of numpy arrays
+        """
+        ...
+
+    def free_outputs(self):
+        """Frees the output arrays"""
+        ...
+
+
 class Execution(metaclass=Singleton):
-    """Class that deals with code execution and cache management"""
+    """Class that deals with code execution and cache management
+
+    Attributes:
+        exec_data_file: Path to the local file where exec data is cached
+        main_exec_data: External exec data that was read at the beginning of training
+    """
 
     exec_data_file: str
-    """Path to the local file where exec data is cached"""
-
     main_exec_data: Optional[dict[str, dict[str, int]]]
-    """External exec data that was read at the beginning of training"""
 
     @overload
     def __init__(self):
@@ -41,15 +69,30 @@ class Execution(metaclass=Singleton):
 
     @overload
     def __init__(self, exec_data_file: str):
-        """Initialize a new first instance without main exec data"""
+        """Initialize a new first instance without main exec data
+
+        Args:
+            exec_data_file: Path to the local file where exec data is cached
+        """
         ...
 
     @overload
     def __init__(self, exec_data_file: str, main_exec_data: dict[str, dict[str, int]]):
-        """Initialize a new first instance"""
+        """Initialize a new first instance
+
+        Args:
+            exec_data_file: Path to the local file where exec data is cached
+            main_exec_data: External exec data that was read at the beginning of training
+        """
         ...
 
     def __init__(self, exec_data_file: Optional[str] = None, main_exec_data: Optional[dict[str, dict[str, int]]] = None):
+        """Initialize a new instance
+
+        Args:
+            exec_data_file: Path to the local file where exec data is cached
+            main_exec_data: External exec data that was read at the beginning of training
+        """
         if exec_data_file is None:
             raise Exception("No existing instance of class Execution has been found")
 
@@ -63,15 +106,14 @@ class Execution(metaclass=Singleton):
         applies bufferization and lowering transforms before executing the code.
 
         Args:
-            module (Module): The MLIR module to execute.
-            bench_name (str): The benchmark name for cache management.
-            seq (list[list[Action]]): The sequence of transformations applied to reach this code.
+            module: The MLIR module to execute.
+            bench_name: The benchmark name for cache management.
+            seq: The sequence of transformations applied to reach this code.
 
         Returns:
-            tuple[int, bool, bool]: A tuple containing:
-                - Execution time in nanoseconds
-                - Boolean indicating if execution succeeded
-                - Boolean indicating if this is a cache miss (True if executed, False if cached)
+            Execution time in nanoseconds.
+            Boolean indicating if execution succeeded.
+            Boolean indicating if this is a cache miss (True if executed, False if cached).
         """
         code_cache_key = self.get_code_cache_key(seq)
         cache_exec_time = self.__check_execution_cache(bench_name, code_cache_key)
@@ -86,7 +128,7 @@ class Execution(metaclass=Singleton):
         """Update the temp execution cache with the new data.
 
         Args:
-            new_data (dict[str, dict[str, int]]): The new data to update.
+            new_data: The new data to update.
         """
         if not self.exec_data_file:
             raise Exception("Execution data file not provided")
@@ -113,10 +155,10 @@ class Execution(metaclass=Singleton):
         """Get the code cache key for the given operation state.
 
         Args:
-            seq (list[list[Action]]): The sequence of transformations applied to reach this code.
+            seq: The sequence of transformations applied to reach this code.
 
         Returns:
-            str: the code cache key.
+            the code cache key.
         """
         ops_codes = []
         for op_seq in seq:
@@ -133,11 +175,11 @@ class Execution(metaclass=Singleton):
         result (if the executed code returns the correct result).
 
         Args:
-            module (Module): The MLIR module to execute.
+            module: The MLIR module to execute.
 
         Returns:
-            Optional[float]: the execution time in seconds.
-            bool: the assertion result.
+            The execution time in nanoseconds.
+            The assertion result.
         """
 
         pass_pipeline = """builtin.module(
@@ -195,11 +237,11 @@ class Execution(metaclass=Singleton):
         """Check the execution cache for the given operation state.
 
         Args:
-            bench_name (str): The benchmark name to check.
-            cache_key (str): The cache key to check.
+            bench_name: The benchmark name to check.
+            cache_key: The cache key to check.
 
         Returns:
-            Optional[int]: the execution time in nanoseconds if the operation is found in the cache, otherwise None.
+            the execution time in nanoseconds if the operation is found in the cache, otherwise None.
         """
         # Start by checking the main execution data
         if self.main_exec_data and bench_name in self.main_exec_data and cache_key in self.main_exec_data[bench_name]:
@@ -219,7 +261,16 @@ class Execution(metaclass=Singleton):
         return None
 
     @staticmethod
-    def __create_params(module: Module):
+    def __create_params(module: Module) -> tuple[list[np.ndarray], OutputsStructure]:
+        """Creates the input and output parameters for the given MLIR module.
+
+        Args:
+            module: The MLIR module to create the parameters for.
+
+        Returns:
+            The list of inputs as numpy arrays
+            The outputs structure (output arrays + delta)
+        """
         def __get_dtype(memref_type: MemRefType):
             et = memref_type.element_type
             match et:
@@ -262,7 +313,7 @@ class Execution(metaclass=Singleton):
             descriptor_type = make_nd_memref_descriptor(out_type.rank, as_ctype(__get_dtype(out_type)))
             out_fields.append((f'out_{i}', descriptor_type))
 
-        class OutputsStructure(ctypes.Structure):
+        class _OutputsStructure(ctypes.Structure):
             _fields_ = [
                 *out_fields,
                 ("delta", ctypes.c_int64)
@@ -287,7 +338,7 @@ class Execution(metaclass=Singleton):
                             Execution.free_pointer(address)
                             setattr(self, field_name, mem_desc_T())
 
-        outputs_structure = OutputsStructure()
+        outputs_structure = _OutputsStructure()
         for i, (field_name, field_type) in enumerate(out_fields):
             out_arg = field_type()
             setattr(outputs_structure, field_name, out_arg)
@@ -295,7 +346,21 @@ class Execution(metaclass=Singleton):
         return inputs, outputs_structure
 
     @staticmethod
-    def __convert_to_args(inputs: list[np.ndarray], outputs_structure: ctypes.Structure):
+    def __convert_to_args(inputs: list[np.ndarray], outputs_structure: OutputsStructure) -> list[ctypes._Pointer[ctypes._Pointer[ctypes.Structure]]]:
+        """Converts input arrays and output structure into ctypes arguments for MLIR execution.
+
+        Prepares arguments in the format required by the MLIR execution engine. Each argument
+        is a double pointer (pointer to pointer) to allow proper handling in the C calling
+        convention.
+
+        Args:
+            inputs: List of input numpy arrays to be passed to the MLIR kernel.
+            outputs_structure: ctypes Structure containing output memref descriptors and
+                execution time.
+
+        Returns:
+            List of double pointers to ctypes Structures suitable for passing to ExecutionEngine.invoke().
+        """
         args: list[ctypes._Pointer[ctypes._Pointer[ctypes.Structure]]] = []
         args.append(ctypes.pointer(ctypes.pointer(outputs_structure)))
         for in_arr in inputs:
@@ -306,6 +371,11 @@ class Execution(metaclass=Singleton):
 
     @staticmethod
     def free_pointer(ptr: ctypes.c_void_p):
+        """Free the memory pointed to by the given pointer using the C standard library.
+
+        Args:
+            ptr: The pointer to free.
+        """
         # Find the C standard library
         libc_path = ctypes.util.find_library('c')
         if not libc_path:

@@ -168,12 +168,12 @@ class ActionSpace:
         """Create a list of distributions for the actions based on the logits.
 
         Args:
-            obs (torch.Tensor): Observation tensor.
-            selection_logits (torch.Tensor): Logits for action selection.
+            obs: Observation tensor.
+            selection_logits: Logits for action selection.
             *actions_logits (torch.Tensor): Logits for each action's parameters.
 
         Returns:
-            list[Distribution]: List of distributions for each action.
+            List of distributions for each action.
         """
         from mlir_rl_artifact.observation import Observation, ActionMask
 
@@ -198,10 +198,10 @@ class ActionSpace:
         """Create a list of uniform distributions for the actions based on the observation.
 
         Args:
-            obs (torch.Tensor): Observation tensor.
+            obs: Observation tensor.
 
         Returns:
-            list[Distribution]: List of distributions for each action.
+            List of distributions for each action.
         """
         from mlir_rl_artifact.observation import Observation, ActionMask, NumLoops
 

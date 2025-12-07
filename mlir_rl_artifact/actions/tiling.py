@@ -133,10 +133,10 @@ class Tiling(Action):
         """Get the number of tiling candidates for a given loop upper bound.
 
         Args:
-            ub (int): The loop upper bound.
+            ub: The loop upper bound.
 
         Returns:
-            int: The number of candidates.
+            The number of candidates.
         """
         for i in range(Config().num_tile_sizes):
             ts = 2 ** i

@@ -106,18 +106,17 @@ class DaskManager(metaclass=Singleton):
         """Map a function across objects in a distributed manner.
 
         Args:
-            func (Callable[[obj_T, str, 'Benchmarks', Optional[dict[str, dict[str, int]]]], T]):
-                The function to apply to each object.
-            objs (Iterable[obj_T]): The objects to apply the function to.
-            benchs (Benchmarks): The benchmark suite to use.
-            main_exec_data (Optional[dict[str, dict[str, int]]]): The main execution data (if available).
-            training (bool): Whether the mapping is for training. if True,
+            func: The function to apply to each object.
+            objs: The objects to apply the function to.
+            benchs: The benchmark suite to use.
+            main_exec_data: The main execution data (if available).
+            training: Whether the mapping is for training. if True,
                 the function will be executed with a timeout and the
                 training benchmarks will be used instead of evaluation.
-            obj_str (Callable[[obj_T], str]): A function to convert each object to a string for logging.
+            obj_str: A function to convert each object to a string for logging.
 
         Returns:
-            list[Optional[T]]: A list of the results of the function applied to each object.
+            A list of the results of the function applied to each object.
         """
 
         if not ENABLED or self.num_workers == 0:
@@ -184,10 +183,10 @@ class DaskManager(metaclass=Singleton):
         returned by this function.
 
         Args:
-            func (Callable[[], T]): The function to run.
+            func: The function to run.
 
         Returns:
-            T: The result of the function.
+            The result of the function.
         """
 
         if not ENABLED or self.num_workers == 0:
@@ -208,11 +207,11 @@ class DaskManager(metaclass=Singleton):
         and keep track of its result (Future) for re-use.
 
         Args:
-            key (str): The key of the function.
-            worker (str): The worker to submit the function to.
+            key: The key of the function.
+            worker: The worker to submit the function to.
 
         Returns:
-            Future: The future of the function.
+            The future of the function.
         """
         assert key in self.persistent_funcs, f"Task {key} expected to be registered"
         func = self.persistent_funcs[key]
@@ -233,11 +232,11 @@ class DaskManager(metaclass=Singleton):
         """Get the result of a persistent function from a worker.
 
         Args:
-            key (str): The key of the function.
-            worker (str): The worker to get the result from.
+            key: The key of the function.
+            worker: The worker to get the result from.
 
         Returns:
-            Future: The future that points to the result of the function.
+            The future that points to the result of the function.
         """
 
         worker_key = f'{key}_{worker}'
@@ -256,11 +255,11 @@ class DaskManager(metaclass=Singleton):
         become invalid (due to a worker failure mostly).
 
         Args:
-            key (str): The key of the function.
-            worker (str): The worker to renew the result on.
+            key: The key of the function.
+            worker: The worker to renew the result on.
 
         Returns:
-            Future: The future that points to the result of the function.
+            The future that points to the result of the function.
         """
         worker_key = f'{key}_{worker}'
         if worker_key in self.persistent_futures:
@@ -273,7 +272,7 @@ class DaskManager(metaclass=Singleton):
         This should be called when a worker has failed.
 
         Args:
-            worker (str): The worker to renew the results on.
+            worker: The worker to renew the results on.
         """
         for key in self.persistent_funcs:
             self.__renew_persistent(key, worker)
@@ -289,16 +288,16 @@ class DaskManager(metaclass=Singleton):
         """Execute a function on an object, and submit it to a worker.
 
         Args:
-            func (Callable[[obj_T, str, 'Benchmarks', Optional[dict[str, dict[str, int]]]], T]): The function to execute.
-            idx (int): The index of the object (for tracking purposes).
-            obj (obj_T): The object to execute the function on.
-            worker (str): The worker to submit the result to.
-            training (bool): Whether the object is for training. if True,
+            func: The function to execute.
+            idx: The index of the object (for tracking purposes).
+            obj: The object to execute the function on.
+            worker: The worker to submit the result to.
+            training: Whether the object is for training. if True,
                 the function will be executed with a timeout and the
                 training benchmarks will be used instead of evaluation.
 
         Returns:
-            Future: The future that points to the result of the function.
+            The future that points to the result of the function.
         """
         # Add a wrapper to track state order
         def func_wrapper(idx: int, *args):

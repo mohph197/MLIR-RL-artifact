@@ -200,11 +200,11 @@ class Interchange(Action):
         """Decode the interchange parameter to get the loop permutation.
 
         Args:
-            parameter (int): The interchange parameter.
-            num_loops (int): The number of loops in the operation.
+            parameter: The interchange parameter.
+            num_loops: The number of loops in the operation.
 
         Returns:
-            list[int]: The loop permutation.
+            The loop permutation.
         """
         x = parameter
         n = num_loops
@@ -238,10 +238,10 @@ class Interchange(Action):
         """Get all 1c 2c 3c possible interchanges for `num_loops`
 
         Args:
-            num_loops (int): The number of loops in the operation.
+            num_loops: The number of loops in the operation.
 
         Returns:
-            list[tuple]: The list of all possible interchanges.
+            The list of all possible interchanges.
         """
 
         interchanges = []

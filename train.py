@@ -3,6 +3,12 @@
 This module implements the primary training loop for the reinforcement learning system.
 It initializes the models, loads benchmark data, and iterates through PPO training steps
 including trajectory collection, policy updates, and periodic evaluation.
+
+Execution command:
+
+```bash
+CONFIG_FILE_PATH=path/to/config.json poetry run train
+```
 """
 
 from dotenv import load_dotenv
@@ -31,13 +37,7 @@ from mlir_rl_artifact.utils.file_logger import FileLogger
 from mlir_rl_artifact.utils.gpu_occupier import GPUOccupier
 
 
-def main() -> None:
-    """Execute the main training loop for MLIR RL.
-
-    Initializes the training infrastructure, loads benchmark data, and runs PPO
-    training for the specified number of iterations. Includes periodic model saving
-    and benchmark evaluation.
-    """
+def main():
     torch.manual_seed(123)
     torch.cuda.manual_seed_all(123)
     np.random.seed(123)

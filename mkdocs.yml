@@ -24,6 +24,14 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+  features:
+    - content.code.copy
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
 
 plugins:
   - search
@@ -37,17 +45,57 @@ plugins:
           - https://distributed.dask.org/en/latest/objects.inv
           - https://jobqueue.dask.org/en/latest/objects.inv
           - https://mlir.llvm.org/python-bindings/objects.inv
+          - https://numpy.org/doc/1.26/objects.inv
           options:
             docstring_style: google
             docstring_options:
               ignore_init_summary: true
             merge_init_into_class: true
+            relative_crossrefs: true
             show_symbol_type_heading: true
+            show_root_toc_entry: false
+            modernize_annotations: true
+            overloads_only: true
+            show_attribute_values: false
+            members_order: source
             extensions:
             - dataclasses
 
 markdown_extensions:
-  - toc:
-      toc_depth: "2-6"
-      permalink: true
   - sane_lists
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Entry points: entry_points/index.md
+  - API reference:
+    - Benchmarks: api_reference/benchmarks.md
+    - Environment: api_reference/env.md
+    - Execution: api_reference/execution.md
+    - Model: api_reference/model.md
+    - Observation: api_reference/observation.md
+    - PPO: api_reference/ppo.md
+    - State: api_reference/state.md
+    - Trajectory: api_reference/trajectory.md
+    - Transforms: api_reference/transforms.md
+    - Actions:
+      - api_reference/actions/index.md
+      - Base: api_reference/actions/base.md
+      - Interchange: api_reference/actions/interchange.md
+      - No transformation: api_reference/actions/no_transformation.md
+      - Tiled fusion: api_reference/actions/tiled_fusion.md
+      - Tiled parallelization: api_reference/actions/tiled_parallelization.md
+      - Tiling: api_reference/actions/tiling.md
+      - Vectorization: api_reference/actions/vectorization.md
+    - Utils:
+      - Bindings process: api_reference/utils/bindings_process.md
+      - Config: api_reference/utils/config.md
+      - Dask manager: api_reference/utils/dask_manager.md
+      - File logger: api_reference/utils/file_logger.md
+      - GPU occupier: api_reference/utils/gpu_occupier.md
+      - Log: api_reference/utils/log.md
+      - Singleton: api_reference/utils/singleton.md

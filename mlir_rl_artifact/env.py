@@ -20,22 +20,26 @@ import traceback
 
 
 class Env:
-    """RL Environment class"""
+    """RL Environment class
+
+    Attributes:
+        bench_idx: Index of the selected benchmark.
+        benchmark_data: Features of the selected benchmark.
+    """
 
     bench_idx: int
-    """Index of the selected benchmark"""
     benchmark_data: BenchmarkFeatures
-    """Features of the selected benchmark"""
 
     def reset(self, benchs: Benchmarks, bench_idx: Optional[int] = None) -> OperationState:
         """Reset the environment.
 
         Args:
-            benchs (Benchmarks): The benchmarks dataset.
-            bench_idx (Optional[int]): The index of the benchmark to set the environment to. If None, a random benchmark is selected. Defaults to None.
+            benchs: The benchmarks dataset.
+            bench_idx: The index of the benchmark to set the environment to.
+                If None, a random benchmark is selected. Defaults to None.
 
         Returns:
-            OperationState: The initial state of the environment.
+            The initial state of the environment.
         """
         # Get the benchmark
         if bench_idx is None:
@@ -49,13 +53,13 @@ class Env:
         """Take a step in the environment.
 
         Args:
-            state (OperationState): The current state.
-            action (Action): The action to take.
+            state: The current state.
+            action: The action to take.
 
         Returns:
-            OperationState: The new state after applying the action. The state's terminal
-                flag is set if the action failed, is terminal, or the truncation step limit
-                is reached.
+            The new state after applying the action. The state's terminal
+                flag is set if the action failed, is terminal, or the truncation
+                step limit is reached.
         """
         # Copy the current state to introduce the changes throughout the function
         next_state = state.copy()
@@ -85,10 +89,10 @@ class Env:
         """Get the state that represents the next operation (None if benchmark is done).
 
         Args:
-            state (OperationState): The current state.
+            state: The current state.
 
         Returns:
-            Optional[OperationState]: The next state. If None then bench is done.
+            The next state. If None then bench is done.
         """
         # Reset to another benchmark if the current benchmark is done (reached first operation)
         if self.__bench_is_done(state):
@@ -103,6 +107,17 @@ class Env:
         return next_state
 
     def apply_and_run_sequence(self, seq: list[list[Action]]) -> tuple[list[float], float, Optional[int], bool]:
+        """Apply the sequence of actions to the state's code and run it.
+
+        Args:
+            seq: The sequence of actions to apply.
+
+        Returns:
+            The rewards received.
+            The final speedup.
+            The execution time.
+            Whether it was a cache miss.
+        """
         transformed_module, rewards = self.__apply_sequence(seq)
 
         # Evaluate the code (since the operation is done)
@@ -131,6 +146,19 @@ class Env:
         return rewards, speedup, new_exec_time, cache_miss
 
     def failed_seq(self, seq: list[list[Action]]) -> tuple[list[float], float, Optional[int], bool]:
+        """Generate results for a failed sequence.
+        Typically used for aborted states which never
+        reached the last operation.
+
+        Args:
+            seq: The sequence of actions that failed.
+
+        Returns:
+            The rewards received.
+            The final speedup.
+            The execution time.
+            Whether it was a cache miss.
+        """
         rewards = [0.0 for op_seq in reversed(seq) for action in op_seq for _ in range(len(action.sub_actions) + 1)]
         rewards[-1] = self.__action_reward(True, False)
         return rewards, 1.0, None, True
@@ -139,10 +167,10 @@ class Env:
         """Create a new operation state.
 
         Args:
-            operation_idx (int): The operation index.
+            operation_idx: The operation index.
 
         Returns:
-            OperationState: The new operation state.
+            The new operation state.
         """
         operation_tag = self.benchmark_data.operation_tags[operation_idx]
         operation_features = self.benchmark_data.operations[operation_tag].copy()
@@ -179,10 +207,10 @@ class Env:
         """Get the index of the current operation.
 
         Args:
-            state (OperationState): The current state.
+            state: The current state.
 
         Returns:
-            int: The index of the current operation.
+            The index of the current operation.
         """
         return self.benchmark_data.operation_tags.index(state.operation_tag)
 
@@ -190,10 +218,10 @@ class Env:
         """Check if the benchmark is done.
 
         Args:
-            state (OperationState): The current state.
+            state: The current state.
 
         Returns:
-            bool: A flag indicating if the benchmark is done.
+            A flag indicating if the benchmark is done.
         """
         return self.__current_op_index(state) == 0
 
@@ -201,13 +229,13 @@ class Env:
         """Get the reward of the action based on the transformation and execution results.
 
         Args:
-            trans_succeeded (bool): A flag indicating if the transformation was successful.
-            exec_succeeded (Optional[bool]): A flag indicating if the execution was successful. (required if trans succeeded)
-            new_exec_time (Optional[float]): The execution time after transformation. (required if exec succeeded)
-            old_exec_time (Optional[float]): The original execution time. (required if exec succeeded)
+            trans_succeeded: A flag indicating if the transformation was successful.
+            exec_succeeded: A flag indicating if the execution was successful. (required if trans succeeded)
+            new_exec_time: The execution time after transformation. (required if exec succeeded)
+            old_exec_time: The original execution time. (required if exec succeeded)
 
         Returns:
-            float: The reward of the action.
+            The reward of the action.
         """
         if not trans_succeeded:
             return -5.0
@@ -223,11 +251,11 @@ class Env:
         """Get the reward based on the speedup.
 
         Args:
-            new (float): The new execution time.
-            old (float): The old execution time.
+            new: The new execution time.
+            old: The old execution time.
 
         Returns:
-            float: The calculated reward.
+            The calculated reward.
         """
 
         # if old < new * 2:
@@ -242,11 +270,11 @@ class Env:
         Notes: Updated fields are:
             - transformation_history
             - producers features in case of fusion
-            - operation_features (to reflect the transformation)
+            - operation features (to reflect the transformation)
 
         Args:
-            state (OperationState): The current state.
-            action (Action): The action taken.
+            state: The current state.
+            action: The action taken.
         """
         # Record action
         state.record_action(action)
@@ -262,10 +290,10 @@ class Env:
         """Apply the sequence of actions to the state's code.
 
         Args:
-            seq (list[Action]): the sequence of actions to apply.
+            seq: the sequence of actions to apply.
 
         Returns:
-            tuple[str, list[float]]: the resulting code and rewards received for each action in the sequence.
+            The resulting code and rewards received for each action in the sequence.
         """
         rewards: list[float] = []
         with Context():
