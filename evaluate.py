@@ -4,11 +4,10 @@ This module evaluates all trained model checkpoints found in the `models`
 directory on benchmark datasets, measuring optimization quality through
 speedup factors and execution times.
 
-Execution command:
-
-```bash
-CONFIG_FILE_PATH=path/to/config.json poetry run evaluate
-```
+Execution Command:
+    ```bash
+    CONFIG_FILE_PATH=path/to/config.json poetry run evaluate
+    ```
 """
 
 from dotenv import load_dotenv

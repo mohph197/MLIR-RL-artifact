@@ -37,6 +37,7 @@ dependencies = [
 [project.scripts]
 train = 'train:main'
 evaluate = 'evaluate:main'
+baseline = 'baseline:main'
 
 
 [build-system]

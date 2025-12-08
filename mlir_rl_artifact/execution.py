@@ -143,7 +143,7 @@ class Execution(metaclass=Singleton):
 
         try:
             with open(self.exec_data_file + ".tmp", "w") as file:
-                json.dump(data, file, indent=4)
+                json.dump(data, file, indent=2)
                 file.flush()
                 os.fsync(file.fileno())
             os.replace(self.exec_data_file + ".tmp", self.exec_data_file)
@@ -346,7 +346,7 @@ class Execution(metaclass=Singleton):
         return inputs, outputs_structure
 
     @staticmethod
-    def __convert_to_args(inputs: list[np.ndarray], outputs_structure: OutputsStructure) -> list[ctypes._Pointer[ctypes._Pointer[ctypes.Structure]]]:
+    def __convert_to_args(inputs: list[np.ndarray], outputs_structure: OutputsStructure) -> list:
         """Converts input arrays and output structure into ctypes arguments for MLIR execution.
 
         Prepares arguments in the format required by the MLIR execution engine. Each argument

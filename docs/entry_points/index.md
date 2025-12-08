@@ -3,8 +3,6 @@ hide:
   - navigation
 ---
 
-# Entry Points
-
 ## Training Script
 
 ::: train
@@ -12,3 +10,7 @@ hide:
 ## Evaluation Script
 
 ::: evaluate
+
+## Baseline
+
+::: baseline

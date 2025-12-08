@@ -4,11 +4,10 @@ This module implements the primary training loop for the reinforcement learning 
 It initializes the models, loads benchmark data, and iterates through PPO training steps
 including trajectory collection, policy updates, and periodic evaluation.
 
-Execution command:
-
-```bash
-CONFIG_FILE_PATH=path/to/config.json poetry run train
-```
+Execution Command:
+    ```bash
+    CONFIG_FILE_PATH=path/to/config.json poetry run train
+    ```
 """
 
 from dotenv import load_dotenv

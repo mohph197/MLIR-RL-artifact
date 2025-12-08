@@ -3,8 +3,6 @@ hide:
   - navigation
 ---
 
-# Home
-
 <h2>A deep reinforcement learning system for loop nest optimization in MLIR</h2>
 
 ## Installation
