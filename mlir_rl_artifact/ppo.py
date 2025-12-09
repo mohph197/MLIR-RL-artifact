@@ -403,7 +403,7 @@ def __execute_states(state: OperationState, exec_data_file: str, benchs: Benchma
         Cache miss flag (False if result was cached).
         Worker execution time in seconds.
     """
-    print("Handling benchmark:", state.bench_name)
+    print("Handling benchmark:", state.bench_name, flush=True)
     worker_start = time()
 
     Execution(exec_data_file, main_exec_data)

@@ -317,6 +317,8 @@ Results will be saved to `paper/results/` as a JSON file in the format:
 }
 ```
 
+As well as figures similar to those in the paper in the `paper/figures/` directory.
+
 ## Authors
 
 - Mohammed Tirichine (<km_tirichine@esi.dz>)
